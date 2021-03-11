@@ -1,0 +1,19 @@
+{
+  "name": "travel-app",
+  "version": "1.0.0",
+  "description": "Single Webpage trip planner App with front end and back end",
+  "main": "./src/server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arlw87/Travel-App.git"
+  },
+  "author": "Andrew White",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arlw87/Travel-App/issues"
+  },
+  "homepage": "https://github.com/arlw87/Travel-App#readme"
+}
