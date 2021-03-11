@@ -4,7 +4,8 @@
   "description": "Single Webpage trip planner App with front end and back end",
   "main": "./src/server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/server/server.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/arlw87/Travel-App/issues"
   },
-  "homepage": "https://github.com/arlw87/Travel-App#readme"
+  "homepage": "https://github.com/arlw87/Travel-App#readme",
+  "devDependencies": {
+    "webpack": "^5.24.4",
+    "webpack-cli": "^4.5.0"
+  }
 }
