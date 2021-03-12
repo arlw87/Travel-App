@@ -17,6 +17,11 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: 'babel-loader'
             },
+            //images
+            {
+                test: /\.jpg$/,
+                type: 'asset/resource',
+            },
             {
                 test: /\.scss$/,
                 use: ['style-loader','css-loader','sass-loader']
