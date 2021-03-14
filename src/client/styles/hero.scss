@@ -9,12 +9,11 @@
 #hero-banner {
   width: 100vw;
   height: 100vh;
-  background-color: red;
   background-image: linear-gradient(
-      rgba(245, 246, 252, 0.52),
-      rgba(117, 19, 93, 0.73)
+      rgba(66, 135, 245, 0.5),
+      rgba(66, 245, 93, 0.5)
     ),
-    url(../media/static/hero.jpg);
+    url(../media/static/hero4.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -22,9 +21,9 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  color: #fff;
 
   h1 {
-    color: rgb(15, 15, 15);
     font-size: 4em;
     opacity: 1;
     margin: 0 0 10vh 0;
