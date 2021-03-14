@@ -6,14 +6,19 @@
 
 //SASS has a good way to do different screen sizes learn it and use it
 
+//rgba(66, 135, 245, 0.5),
+//rgba(66, 245, 93, 0.5)
+
+$delay-Time: 4s;
+
 #hero-banner {
   width: 100vw;
   height: 100vh;
   background-image: linear-gradient(
-      rgba(66, 135, 245, 0.5),
-      rgba(66, 245, 93, 0.5)
+      rgba(241, 42, 7, 0.6),
+      rgba(218, 245, 66, 0.5)
     ),
-    url(../media/static/hero4.jpg);
+    url(../media/static/hero.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -24,18 +29,26 @@
   color: #fff;
 
   h1 {
-    font-size: 4em;
+    font-size: 10em;
     opacity: 1;
     margin: 0 0 10vh 0;
     //background-color: royalblue;
+    animation-name: fadeIn;
+    animation-duration: $delay-Time;
   }
 
   div {
     display: flex;
     justify-content: space-around;
-    width: 30vw;
+    width: 32vw;
     // border: rgb(15, 15, 15) 2px solid;
     align-items: center;
+
+    animation-name: flash;
+    animation-duration: 3s;
+    animation-delay: $delay-Time;
+    animation-iteration-count: infinite;
+    opacity: 0;
 
     img {
       height: 2.5em;
@@ -43,10 +56,28 @@
     }
 
     h2 {
-      font-size: 2em;
+      font-size: 3.5em;
     }
   }
 }
 
-.arrow-icon {
+@keyframes flash {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
