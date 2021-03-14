@@ -1,17 +1,53 @@
+//TODO
+//Hero banner inspiration
+// https://www.justinmind.com/blog/inspiring-hero-image-websites/
+// i like the blue green gradient with image one
+// how does asset management work with images
+
+//SASS has a good way to do different screen sizes learn it and use it
+
 #hero-banner {
   width: 100vw;
   height: 100vh;
-  background-image: url(../media/static/hero.jpg);
+  background-color: red;
+  background-image: linear-gradient(
+      rgba(245, 246, 252, 0.52),
+      rgba(117, 19, 93, 0.73)
+    ),
+    url(../media/static/hero.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  opacity: 0.5;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 
   h1 {
-    color: rgb(3, 3, 3);
+    color: rgb(15, 15, 15);
     font-size: 4em;
+    opacity: 1;
+    margin: 0 0 10vh 0;
+    //background-color: royalblue;
   }
+
+  div {
+    display: flex;
+    justify-content: space-around;
+    width: 30vw;
+    // border: rgb(15, 15, 15) 2px solid;
+    align-items: center;
+
+    img {
+      height: 2.5em;
+      width: auto;
+    }
+
+    h2 {
+      font-size: 2em;
+    }
+  }
+}
+
+.arrow-icon {
 }
