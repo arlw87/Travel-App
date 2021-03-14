@@ -4,10 +4,7 @@
 // i like the blue green gradient with image one
 // how does asset management work with images
 
-//SASS has a good way to do different screen sizes learn it and use it
-
-//rgba(66, 135, 245, 0.5),
-//rgba(66, 245, 93, 0.5)
+@import "variables.scss";
 
 $delay-Time: 4s;
 
@@ -19,59 +16,69 @@ $delay-Time: 4s;
       rgba(218, 245, 66, 0.5)
     ),
     url(../media/static/hero.jpg);
-  background-position: center;
+  background-position: left;
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   flex-direction: column;
   color: #fff;
   transform: scaleX(-1);
 
   h1 {
-    transform: scaleX(-1);
-    font-size: 16em;
+    font-size: 3em;
     opacity: 1;
-    // margin: 0 0 10vh 0;
     font-weight: 300;
-    //background-color: royalblue;
     animation-name: fadeIn;
     animation-duration: $delay-Time;
     padding: 0;
     margin: 0;
-    line-height: 1em;
+    line-height: 1.3em;
     text-align: left;
     width: 90vw;
-    // border: 2px blue solid;
+    transform: scaleX(-1);
+    word-wrap: break-word;
+
+    @media (min-width: $medium-laptop) {
+      font-size: 16em;
+      line-height: 1em;
+      transform: scaleX(-1);
+    }
   }
 
   div {
+    transform: scaleX(-1);
     display: flex;
     justify-content: space-around;
-    width: 32vw;
-    // border: rgb(15, 15, 15) 2px solid;
     align-items: center;
-    // margin: 0 0 5vh 0;
-    transform: scaleX(-1);
-
     animation-name: flash;
     animation-duration: 3s;
     animation-delay: 2s;
     animation-iteration-count: infinite;
     opacity: 0;
-    margin: 0;
-    // border: 2px blue solid;
+    margin: 20vh 0 0 0;
 
     img {
-      height: 3em;
+      height: 1.8em;
       width: auto;
+      margin: 0 5px;
+      @media (min-width: $medium-laptop) {
+        font-size: 3em;
+      }
     }
 
     h2 {
-      font-size: 3em;
+      font-size: 1.8em;
       font-weight: 300;
       margin: 0;
+      @media (min-width: $medium-laptop) {
+        font-size: 3em;
+      }
+    }
+
+    @media (min-width: $medium-laptop) {
+      width: 32vw;
     }
   }
 }
