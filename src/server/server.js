@@ -45,7 +45,10 @@ app.post(`/query`, (req, res) => {
             console.log('fetching data');
             return fetchData(url, 'GET');
         }).then(result => extractWeatherData(result, date))
-        .then(result => console.log(result))
+        .then(result => {
+            console.log("Weather forecast results")
+            console.log(result)}
+            )
         .catch((error) => {
             console.log('There has been an error');
             console.log(error);
@@ -98,10 +101,12 @@ const forecastWeatherUrl = (positionObj, apiKey) => {
     return url;
 }
 
+//the requirements on the project document for this are unclear but here is how i have interrupted it
+//if the trip is in the next 16 days then use the forecast from the 16 day forecast on the appropriate
+//day. If the trip is after the next 16 days then use the 16th day forecast. 
 const extractWeatherData = (data, date) => {
 
     //use the form on client to ensure a previous date is not selected.
-
     let weatherData = null;
     //loop through the data and compare date
     for (dayData of data.data){
