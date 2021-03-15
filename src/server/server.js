@@ -15,6 +15,7 @@ app.use(express.static('dist'));
 
 //Sensitive information
 const geonameUsername = process.env.GEONAME_USERNAME; 
+const weatherbit_api = process.env.WEATHERBIT_API_KEY;
 
 //start the server
 const port = 8000;
@@ -30,11 +31,25 @@ app.post(`/query`, (req, res) => {
     const location = req.body.destination;
     const date = req.body.date;
 
-    const geonameUrl = geoNamesUrl(geonameUsername, 'Paris');
-    postData(geonameUrl)
+    const geonameUrl = geoNamesUrl(geonameUsername, location);
+    fetchData(geonameUrl, 'POST')
         .then((result) => {
            return extractGeonamesData(result); 
-        }).then(result => console.log(result));
+        }).then((result) => {
+            console.log('results');
+            console.log(result);
+            const url = forecastWeatherUrl(result, weatherbit_api);
+            //promise not returned until the fetchData is complete
+            //fetchData returns a promise
+            //a then is not resolved until a value is returned
+            console.log('fetching data');
+            return fetchData(url, 'GET');
+        }).then(result => extractWeatherData(result, date))
+        .then(result => console.log(result))
+        .catch((error) => {
+            console.log('There has been an error');
+            console.log(error);
+        });
 
     res.send({status:'complete'});
 });
@@ -61,12 +76,50 @@ const geoNamesUrl = (username, location) => {
  * @returns The longitude and latitude data in a object
  */
 const extractGeonamesData = (dataObj) => {
-    return {lat: dataObj.geonames[0].lat,
-            long: dataObj.geonames[0].lng}
+    const long = dataObj.geonames[0].lng;
+    const lat = dataObj.geonames[0].lat;
+    return {lat: lat,
+            long: long}
 }
 
 //weather bit API 
+const currentWeatherUrl = (positionObj, apiKey) => {
+    const base = `https://api.weatherbit.io/v2.0/current?`;
+    const url = `${base}lat=${positionObj.lat}&lon=${positionObj.long}&key=${apiKey}`
+    return url;
+}
 
+//forest API
+const forecastWeatherUrl = (positionObj, apiKey) => {
+    console.log(positionObj);
+    const base = `https://api.weatherbit.io/v2.0/forecast/daily?`;
+    const url = `${base}&lat=${positionObj.lat}&lon=${positionObj.long}&key=${apiKey}`;
+    console.log(url);
+    return url;
+}
+
+const extractWeatherData = (data, date) => {
+
+    //use the form on client to ensure a previous date is not selected.
+
+    let weatherData = null;
+    //loop through the data and compare date
+    for (dayData of data.data){
+        if (dayData.datetime == date){
+            console.log('Date Matches!');
+            weatherData = dayData;
+            break;
+        }
+    }
+    //if the day is beyhond the 16 days of forecast data then send the 16th
+    //day forecast
+    if (weatherData == null){
+        weatherData = data.data[data.data.length - 1];
+    }
+
+    console.log(date);
+    return(weatherData);
+}
 
 
 
@@ -76,13 +129,17 @@ const extractGeonamesData = (dataObj) => {
  * @param {string} url - Address of the API call  
  * @returns The parse json data of the response
  */
-const postData = async (url) => {
-        const response = await fetch(url, {
-            method: 'POST'
-        });
-    
+const fetchData = async (url, method) => {
         try{
+            const response = await fetch(url, {
+                method: method
+            });
             const data = await response.json();
+            //if there is an error in the response
+            //throw an error
+            if ('error' in data){
+                throw (data['error']);
+            }
             return data;
         } catch(error){
             console.log(error);
