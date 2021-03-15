@@ -3,8 +3,7 @@
 // https://www.justinmind.com/blog/inspiring-hero-image-websites/
 // i like the blue green gradient with image one
 // how does asset management work with images
-
-@import "variables.scss";
+@use 'variables';
 
 $delay-Time: 4s;
 
@@ -27,30 +26,34 @@ $delay-Time: 4s;
   transform: scaleX(-1);
 
   h1 {
-    font-size: 3em;
+    font-size: calc(100vw/7);
+    line-height: 1em;
     opacity: 1;
     font-weight: 300;
     animation-name: fadeIn;
     animation-duration: $delay-Time;
     padding: 0;
     margin: 0;
-    line-height: 1.3em;
     text-align: left;
     width: 90vw;
     transform: scaleX(-1);
     word-wrap: break-word;
 
-    @media (min-width: $medium-laptop) {
+    @media (min-width: variables.$large-laptop) {
       font-size: 16em;
       line-height: 1em;
-      transform: scaleX(-1);
+      justify-content: center;
+    }
+
+    @media (min-width: variables.$superlarge-screen) {
+      max-width: 1824px;
     }
   }
 
   div {
     transform: scaleX(-1);
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     animation-name: flash;
     animation-duration: 3s;
@@ -59,26 +62,40 @@ $delay-Time: 4s;
     opacity: 0;
     margin: 20vh 0 0 0;
 
+    width: 300px;
+
+    @media (min-width: variables.$tablet) {
+      width: 500px;
+    }
+
+    @media (min-width: variables.$small-laptop) {
+      margin: 0;
+    }
+
+
+
     img {
-      height: 1.8em;
+      height: 1em;
       width: auto;
       margin: 0 5px;
-      @media (min-width: $medium-laptop) {
-        font-size: 3em;
+
+      @media (min-width: variables.$tablet) {
+        font-size: 1.6em;
       }
     }
 
     h2 {
-      font-size: 1.8em;
+      font-size: 2em;
       font-weight: 300;
       margin: 0;
-      @media (min-width: $medium-laptop) {
+
+      @media (min-width: variables.$tablet) {
+        font-size: 2.5em;
+      }
+
+      @media (min-width: variables.$medium-laptop) {
         font-size: 3em;
       }
-    }
-
-    @media (min-width: $medium-laptop) {
-      width: 32vw;
     }
   }
 }
