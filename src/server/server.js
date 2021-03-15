@@ -27,39 +27,65 @@ const server = app.listen(port,  ()=>{
 app.post(`/query`, (req, res) => {
     console.log("Post to API 'Query'");
     console.log(req.body);
+    const location = req.body.destination;
+    const date = req.body.date;
 
-    geoNamesFetch(geonameUsername, 'Paris')
-    .then((data) => {
-        return extractGeonamesData(data);
-    }).then((data) => console.log(data));
+    const geonameUrl = geoNamesUrl(geonameUsername, 'Paris');
+    postData(geonameUrl)
+        .then((result) => {
+           return extractGeonamesData(result); 
+        }).then(result => console.log(result));
 
     res.send({status:'complete'});
 });
 
 
-//post query to the geonames API
-//http://api.geonames.org/searchJSON?formatted=true&q=london&maxRows=3&lang=en&username=arlw54
-const geoNamesFetch = async (username, location) => {
-
+/**
+ * Creates and returns the geoname url for the API call to get location data for the
+ * placed name that is searched
+ * @param {string} username - the username for the geoname account 
+ * @param {string} location - the location that is searched
+ * @returns A string representing the api url address
+ */
+const geoNamesUrl = (username, location) => {
     //create the geoNamesFetchURL
     const base = 'http://api.geonames.org/searchJSON?formatted=true&q=';
-
     const url = `${base}${location}&maxRows=3&lang=en&username=${username}`;
-
-    const response = await fetch(url, {
-        method: 'POST'
-    });
-
-    try{
-        const data = await response.json();
-        return data;
-    } catch(error){
-        console.log(error);
-        throw (error);
-    }
+    return url;
 } 
 
+/**
+ * Extracts the longitude and latitude data from the returned data from the 
+ * geoName api call and saves it in to a object that is returned
+ * @param {*} dataObj - The data Object returned from the geoName API call 
+ * @returns The longitude and latitude data in a object
+ */
 const extractGeonamesData = (dataObj) => {
     return {lat: dataObj.geonames[0].lat,
             long: dataObj.geonames[0].lng}
+}
+
+//weather bit API 
+
+
+
+
+
+/**
+ * Make a POST fetch to the provided API call and parse the returned JSON data
+ * @param {string} url - Address of the API call  
+ * @returns The parse json data of the response
+ */
+const postData = async (url) => {
+        const response = await fetch(url, {
+            method: 'POST'
+        });
+    
+        try{
+            const data = await response.json();
+            return data;
+        } catch(error){
+            console.log(error);
+            throw (error);
+        }
 }
