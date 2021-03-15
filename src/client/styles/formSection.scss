@@ -1,55 +1,147 @@
+@use "variables";
 $inputWidth: 85%;
 $padding: 5px;
 
 #form-section{
     height: 100vh;
     width: 100vw;
-    background-color: #d3d3d3;
+    background-color: #eeeeee;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    h2{
+        width:95vw;
+        font-size: 2em;
+        font-weight: 300;
+        text-align: center;
+        margin: 0 0 5vh 0;
+
+        @media(min-width: variables.$mobileLarge){
+            font-size: 3.5em;
+        }
+
+        @media(min-width: variables.$small-laptop){
+            font-size: 4em;
+        }
+
+        em{
+            color: rgb(246, 44, 25);
+        }
+    }
 
     form{
         background-color: #fff;
         border-radius: 2px;
-        width: 90vw;
+        width: 95vw;
         height: 35vh;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         font-size: 1.5rem;
-        text-align: center;
-        //box-shadow: 3px 4px 10px 0px rgba(117,111,117,1);
+        text-align: center; 
         
-
-        label{
-            width: $inputWidth;
-            color: rgb(105, 105, 105);
-            text-align: left;
-            font-size: 1rem;
-            margin: 0.5rem;
+        @media (min-width: variables.$small-laptop) {
+                flex-direction: row;
+                height: 10vh;
+                align-items: center;
+                justify-content: space-around;
+                font-size: 2rem;
+          }
+        
+        @media (min-width: variables.$medium-laptop){
+            max-width: 1300px;
         }
-
-        input{
-            width: $inputWidth;
-            font-size: 1em;
-            background-color: #f3f3f3;
-            border: none;
-            padding: $padding;
-            
-        }
-
+        
         button{
             width: $inputWidth;
             margin: 1em 0 0 0;
             font-size: 1em;
             background-color: rgba(245, 81, 66, 0.5);
             border: none;
-            margin: 1em 0 0 0;
-            box-sizing: content-box;
-            padding: $padding;
-            color:rgb(246, 44, 25)
+            color:rgb(246, 44, 25);
+
+            @media (min-width: variables.$small-laptop) {
+                width: 12%;
+                align-self: center;
+                margin: 0;
+            }
         }
+    }
+}
+
+#date-div{
+    width: $inputWidth;
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: variables.$small-laptop) {
+        width: 35%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    @media (min-width: variables.$medium-laptop){
+        width: 30%;
+    }
+
+    label{
+        color: rgb(105, 105, 105);
+        text-align: left;
+        font-size: 1rem;
+        margin: 0.5rem 0;
+
+        @media (min-width: variables.$small-laptop) {
+            margin: 0 20px 0 0;
+            font-size: 1.5rem;
+        }
+    }
+
+    input{
+        font-size: 1em;
+        background-color: #f3f3f3;
+        border: none;
+        padding: $padding;
+    }
+}
+
+#dest-div{
+    width: $inputWidth;
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: variables.$small-laptop) {
+        width: 45%;
+        margin: 0 0 0 10px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    label{
+        color: rgb(105, 105, 105);
+        text-align: left;
+        font-size: 1rem;
+        margin: 0.5rem 0;
+
+        @media (min-width: variables.$small-laptop) {
+            margin: 0 20px 0 0;
+            font-size: 1.5rem;
+        }
+    }
+
+    input{
+        font-size: 1em;
+        background-color: #f3f3f3;
+        border: none;
+        padding: $padding;
+
+        @media (min-width: variables.$small-laptop) {
+            width:60%;
+        }
+
     }
 }
