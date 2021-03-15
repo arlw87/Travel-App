@@ -19,5 +19,6 @@ const server = app.listen(port,  ()=>{
 //APIs
 app.post(`/query`, (req, res) => {
     console.log("Post to API 'Query'");
+    console.log(req.body);
     res.send({status:'complete'});
 });
