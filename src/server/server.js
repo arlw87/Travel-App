@@ -31,30 +31,44 @@ app.post(`/query`, (req, res) => {
     const location = req.body.destination;
     const date = req.body.date;
 
+    const clientResponseObject = {
+        weather: undefined,
+        imageUrl: undefined,
+        location: undefined
+    };
+
     const geonameUrl = geoNamesUrl(geonameUsername, location);
     fetchData(geonameUrl, 'POST')
         .then((result) => {
            return extractGeonamesData(result); 
         }).then((result) => {
-            console.log('results');
+
             console.log(result);
             const url = forecastWeatherUrl(result, weatherbit_api);
             //promise not returned until the fetchData is complete
             //fetchData returns a promise
             //a then is not resolved until a value is returned
-            console.log('fetching data');
             return fetchData(url, 'GET');
-        }).then(result => extractWeatherData(result, date))
-        .then(result => {
-            console.log("Weather forecast results")
-            console.log(result)}
-            )
+
+        }).then(result => {
+
+            const forecastData = extractWeatherData(result, date)
+            return weatherDataForClient(forecastData);
+
+        }).then(result => {
+
+            clientResponseObject.weather = result;
+            console.log("Weather forecast results");
+            console.log(result);
+            console.log(clientResponseObject);
+            res.send({status:'complete'});
+        })
         .catch((error) => {
             console.log('There has been an error');
             console.log(error);
+            res.send({status:'failure'});
         });
 
-    res.send({status:'complete'});
 });
 
 
@@ -94,10 +108,8 @@ const currentWeatherUrl = (positionObj, apiKey) => {
 
 //forest API
 const forecastWeatherUrl = (positionObj, apiKey) => {
-    console.log(positionObj);
     const base = `https://api.weatherbit.io/v2.0/forecast/daily?`;
     const url = `${base}&lat=${positionObj.lat}&lon=${positionObj.long}&key=${apiKey}`;
-    console.log(url);
     return url;
 }
 
@@ -124,6 +136,18 @@ const extractWeatherData = (data, date) => {
 
     console.log(date);
     return(weatherData);
+}
+
+const weatherDataForClient = (dataObj) => {
+
+    const iconBaseUrl = `https://www.weatherbit.io/static/img/icons/`
+
+    return {
+        highTemp: dataObj.high_temp,
+        lowTemp: dataObj.low_temp,
+        description: dataObj.weather.description,
+        iconUrl: `${iconBaseUrl}${dataObj.weather.icon}.png`
+    }
 }
 
 
