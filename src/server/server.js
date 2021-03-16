@@ -58,7 +58,9 @@ app.post(`/query`, (req, res) => {
             const forecastData = extractWeatherData(result, date);
             clientResponseObject.weather = weatherDataForClient(forecastData);
             //fetch the image url for the client using the place name
-            const url = createPixelbayUrl(clientResponseObject.location.place, pixelBayApi);
+            //queries with place and county seem to do better
+            const query = `${clientResponseObject.location.place}, ${clientResponseObject.location.country}`;
+            const url = createPixelbayUrl(query, pixelBayApi);
             return fetchData(url, 'GET');
 
         }).then(result => {
