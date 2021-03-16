@@ -16,6 +16,7 @@ app.use(express.static('dist'));
 //Sensitive information
 const geonameUsername = process.env.GEONAME_USERNAME; 
 const weatherbit_api = process.env.WEATHERBIT_API_KEY;
+const pixelBayApi = process.env.PIXELBAY_API_KEY;
 
 //start the server
 const port = 8000;
@@ -52,21 +53,41 @@ app.post(`/query`, (req, res) => {
             //fetchData returns a promise
             //a then is not resolved until a value is returned
             return fetchData(url, 'GET');
+        }).then(result => {
+
+            const forecastData = extractWeatherData(result, date);
+            clientResponseObject.weather = weatherDataForClient(forecastData);
+            //fetch the image url for the client using the place name
+            const url = createPixelbayUrl(clientResponseObject.location.place, pixelBayApi);
+            return fetchData(url, 'GET');
 
         }).then(result => {
 
-            const forecastData = extractWeatherData(result, date)
-            return weatherDataForClient(forecastData);
+            console.log("Pixel Bay Results");
+            //console.log(result);
 
-        }).then(result => {
+            //if there are no images for the place name then use the place country
+            if (result.total == 0){
+                console.log("No result so search using country");
+                //do another query
+                const url = createPixelbayUrl(clientResponseObject.location.country, pixelBayApi);
+                return fetchData(url, 'GET');
+            }
 
-            clientResponseObject.weather = result;
-            console.log("Weather forecast results");
-            console.log(result);
+            return result;
+
+        }).then((result) => {
+
+            //get image url 
+            const imageUrl = result.hits[0].largeImageURL;
+            clientResponseObject.imageUrl = imageUrl;
+
             console.log(clientResponseObject);
-            res.send({status:'complete'});
-        })
-        .catch((error) => {
+            res.send({
+                status:'complete',
+                response:clientResponseObject
+            });
+        }).catch((error) => {
             console.log('There has been an error');
             console.log(error);
             res.send({status:'failure'});
@@ -159,6 +180,14 @@ const weatherDataForClient = (dataObj) => {
     }
 }
 
+//PixelBay
+const createPixelbayUrl = (query, apiKey) => {
+    const baseUrl = `https://pixabay.com/api/`;
+    const url = `${baseUrl}?key=${apiKey}&q=${query}&image_type=photo`
+    console.log('pixelBay url');
+    console.log(url);
+    return url;
+}
 
 
 

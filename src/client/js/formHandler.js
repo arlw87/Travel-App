@@ -19,6 +19,7 @@ searchBtn.addEventListener('click', (event) => {
     }
 
     postData('http://localhost:8000/query', sendObj)
+        .then(result => console.log(result))
         .catch((error) => {
             console.log(error);
         });
