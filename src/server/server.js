@@ -42,8 +42,11 @@ app.post(`/query`, (req, res) => {
         .then((result) => {
            return extractGeonamesData(result); 
         }).then((result) => {
-
             console.log(result);
+            clientResponseObject.location = {
+                place: result.location,
+                country: result.countryName
+            }
             const url = forecastWeatherUrl(result, weatherbit_api);
             //promise not returned until the fetchData is complete
             //fetchData returns a promise
@@ -93,10 +96,16 @@ const geoNamesUrl = (username, location) => {
  * @returns The longitude and latitude data in a object
  */
 const extractGeonamesData = (dataObj) => {
+    console.log(dataObj);
     const long = dataObj.geonames[0].lng;
     const lat = dataObj.geonames[0].lat;
+    const location = dataObj.geonames[0].name;
+    const countryName = dataObj.geonames[0].countryName;
     return {lat: lat,
-            long: long}
+            long: long,
+            location: location,
+            countryName: countryName
+        }
 }
 
 //weather bit API 
