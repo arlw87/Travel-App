@@ -1,147 +1,278 @@
 @use "variables";
 $inputWidth: 85%;
 $padding: 5px;
+$sections-width-small-device: 95vw;
 
-#form-section{
-    height: 100vh;
-    width: 100vw;
-    background-color: #eeeeee;
+#form-section {
+  height: 100vh;
+  width: 100vw;
+  background-color: #eeeeee;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  > h2 {
+    width: $sections-width-small-device;
+    font-size: 2em;
+    font-weight: 300;
+    text-align: center;
+    margin: 0 0 5vh 0;
+
+    @media (min-width: variables.$mobileLarge) {
+      font-size: 3.5em;
+    }
+
+    @media (min-width: variables.$small-laptop) {
+      font-size: 4em;
+    }
+
+    em {
+      color: rgb(246, 44, 25);
+    }
+  }
+
+  form {
+    background-color: #fff;
+    border-radius: 2px;
+    width: $sections-width-small-device;
+    height: 35vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0 0 2vh 0;
+
+    @media (min-width: variables.$small-laptop) {
+      flex-direction: row;
+      height: 10vh;
+      align-items: center;
+      justify-content: space-around;
+      font-size: 2rem;
+    }
+
+    @media (min-width: variables.$medium-laptop) {
+      max-width: 1300px;
+    }
+
+    button {
+      width: $inputWidth;
+      margin: 1em 0 0 0;
+      font-size: 1em;
+      background-color: rgba(245, 81, 66, 0.5);
+      border: none;
+      color: rgb(246, 44, 25);
+
+      @media (min-width: variables.$small-laptop) {
+        width: 12%;
+        align-self: center;
+        margin: 0;
+      }
+    }
+  }
+}
+
+#date-div {
+  width: $inputWidth;
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: variables.$small-laptop) {
+    width: 35%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  @media (min-width: variables.$medium-laptop) {
+    width: 30%;
+  }
+
+  label {
+    color: rgb(105, 105, 105);
+    text-align: left;
+    font-size: 1rem;
+    margin: 0.5rem 0;
+
+    @media (min-width: variables.$small-laptop) {
+      margin: 0 20px 0 0;
+      font-size: 1.5rem;
+    }
+  }
+
+  input {
+    font-size: 1em;
+    background-color: #f3f3f3;
+    border: none;
+    padding: $padding;
+  }
+}
+
+#dest-div {
+  width: $inputWidth;
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: variables.$small-laptop) {
+    width: 45%;
+    margin: 0 0 0 10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  label {
+    color: rgb(105, 105, 105);
+    text-align: left;
+    font-size: 1rem;
+    margin: 0.5rem 0;
+
+    @media (min-width: variables.$small-laptop) {
+      margin: 0 20px 0 0;
+      font-size: 1.5rem;
+    }
+  }
+
+  input {
+    font-size: 1em;
+    background-color: #f3f3f3;
+    border: none;
+    padding: $padding;
+
+    @media (min-width: variables.$small-laptop) {
+      width: 60%;
+    }
+  }
+}
+
+.results {
+  width: $sections-width-small-device;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  //height: 55vh;
+
+  .results-image {
+    background-image: url(../media/static/testImage.jpg);
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 27vh;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    .testHeader {
+      background-color: white;
+      font-weight: 300;
+      font-size: 2.5rem;
+      padding: 0 2%;
+    }
+  }
+
+  .results-text {
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .results-divider {
+      //border: 1px solid grey;
+      background-color: lightgray;
+      height: 2px;
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    .location {
+      margin: 0;
+      text-align: center;
+      font-weight: variables.$textThin;
+      font-size: 2.5em;
+    }
+  }
+
+  button {
+    width: 100%;
+    //margin: auto auto 0 auto;
+    font-size: 1.5em;
+    background-color: rgba(245, 81, 66, 0.5);
+    border: none;
+    color: rgb(246, 44, 25);
+    padding: 1% 0;
+  }
+}
+
+.weather-section {
+  display: flex;
+  //height: 70%;
+  //border: 1px solid blue;
+
+  .weather-icon {
+    // background-image: url(https://www.weatherbit.io/static/img/icons/c02d.png);
+    // background-position: top;
+    // background-repeat: no-repeat;
+    // background-size: contain;
+    width: 45%;
+    height: auto;
+    //border: 1px solid black;
+  }
+
+  .weather-details {
+    //border: 1px solid black;
+    width: 55%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-
-    h2{
-        width:95vw;
-        font-size: 2em;
-        font-weight: 300;
-        text-align: center;
-        margin: 0 0 5vh 0;
-
-        @media(min-width: variables.$mobileLarge){
-            font-size: 3.5em;
-        }
-
-        @media(min-width: variables.$small-laptop){
-            font-size: 4em;
-        }
-
-        em{
-            color: rgb(246, 44, 25);
-        }
+    padding: 0 1vw 0 0;
+    h3 {
+      //border: 1px solid red;
+      font-weight: variables.$textThin;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      margin: 0 0 10px 0;
     }
-
-    form{
-        background-color: #fff;
-        border-radius: 2px;
-        width: 95vw;
-        height: 35vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-        text-align: center; 
-        
-        @media (min-width: variables.$small-laptop) {
-                flex-direction: row;
-                height: 10vh;
-                align-items: center;
-                justify-content: space-around;
-                font-size: 2rem;
-          }
-        
-        @media (min-width: variables.$medium-laptop){
-            max-width: 1300px;
-        }
-        
-        button{
-            width: $inputWidth;
-            margin: 1em 0 0 0;
-            font-size: 1em;
-            background-color: rgba(245, 81, 66, 0.5);
-            border: none;
-            color:rgb(246, 44, 25);
-
-            @media (min-width: variables.$small-laptop) {
-                width: 12%;
-                align-self: center;
-                margin: 0;
-            }
-        }
-    }
+  }
 }
 
-#date-div{
-    width: $inputWidth;
-    display: flex;
-    flex-direction: column;
+.temperature-details {
+  display: flex;
+  //border: 1px solid red;
+  align-items: center;
 
-    @media (min-width: variables.$small-laptop) {
-        width: 35%;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-around;
-    }
+  img {
+    height: 30px;
+    width: auto;
+  }
 
-    @media (min-width: variables.$medium-laptop){
-        width: 30%;
-    }
-
-    label{
-        color: rgb(105, 105, 105);
-        text-align: left;
-        font-size: 1rem;
-        margin: 0.5rem 0;
-
-        @media (min-width: variables.$small-laptop) {
-            margin: 0 20px 0 0;
-            font-size: 1.5rem;
-        }
-    }
-
-    input{
-        font-size: 1em;
-        background-color: #f3f3f3;
-        border: none;
-        padding: $padding;
-    }
+  h4 {
+    margin: 0 5%;
+    font-size: 1.3rem;
+    font-weight: 300;
+  }
 }
 
-#dest-div{
-    width: $inputWidth;
-    display: flex;
-    flex-direction: column;
+.time-to-trip {
+  //border: 1px solid red;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  font-size: 1.3rem;
+  font-weight: 300;
+  margin: 1vh 0 0 0;
 
-    @media (min-width: variables.$small-laptop) {
-        width: 45%;
-        margin: 0 0 0 10px;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-around;
-    }
+  img {
+    height: 25px;
+    width: auto;
+  }
 
-    label{
-        color: rgb(105, 105, 105);
-        text-align: left;
-        font-size: 1rem;
-        margin: 0.5rem 0;
-
-        @media (min-width: variables.$small-laptop) {
-            margin: 0 20px 0 0;
-            font-size: 1.5rem;
-        }
-    }
-
-    input{
-        font-size: 1em;
-        background-color: #f3f3f3;
-        border: none;
-        padding: $padding;
-
-        @media (min-width: variables.$small-laptop) {
-            width:60%;
-        }
-
-    }
+  p {
+    margin: 0;
+  }
 }

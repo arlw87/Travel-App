@@ -19,7 +19,7 @@
     </section>
     <section id="form-section">
       <h2>Where do <em>you</em> want to go?</h2>
-      <form class="shadow">
+      <!-- <form class="shadow">
         <div id="dest-div">
           <label for="destination">Destination</label>
           <input id="destination" type="text">
@@ -29,7 +29,31 @@
           <input id="date" type="date">
         </div>
         <button id="search">Search</button>
-      </form>
+      </form> -->
+      <div class="results shadow">
+        <div class="results-image">
+          <h2 class="testHeader">Japan</h2>
+        </div>
+        <div class ="results-text">
+          <!-- <h2 class="location">Japan</h2> -->
+          <div class="time-to-trip">
+            <img src="../media/static/clock_icon.png">
+            <p>5 days until trip</p>
+          </div>
+          <div class="results-divider"></div>
+          <div class="weather-section">
+            <img class="weather-icon" src="https://www.weatherbit.io/static/img/icons/c02d.png">
+            <div class="weather-details">
+              <h3>Scattered clouds</h3>
+              <div class="temperature-details">
+                <img src="../media/static/temperature_icon.png">
+                <h4>15 / 7 &deg C </h4>
+              </div>
+            </div>
+          </div>
+          <button>Add to Trip</button>
+        </div>
+      </div>
     </section>
     <section id="travel-log"></section>
   </main>
