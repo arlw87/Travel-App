@@ -19,7 +19,7 @@ searchBtn.addEventListener('click', (event) => {
     }
 
     postData('http://localhost:8000/query', sendObj)
-        .then(result => console.log(result))
+        .then(result => displayResults(result))
         .catch((error) => {
             console.log(error);
         });
@@ -47,4 +47,36 @@ searchBtn.addEventListener('click', (event) => {
     }catch(error){
         throw Error(error);
     }
+}
+
+const displayResults = (data) => {
+
+    console.log('From displayResults function');
+    console.log(data);
+
+    //get the elements to update
+    const image = document.querySelector('.results-image'); //location image
+    const locationName = document.querySelector('.locationHeader'); //location name
+    
+    //weather details
+    const weatherDescription = document.querySelector('.weather-details > h3');
+    const weatherIcon = document.querySelector('.weather-icon');
+    const weatherTemps = document.querySelector('.temperature-details-temps');
+
+    //extract the results from the object
+    const imageURL = data.response.imageUrl;
+    const location = data.response.location.place;
+
+    //weather
+    const weatherInfo = data.response.weather.description;
+    const weatherIconUrl = data.response.weather.iconUrl;
+    const highTemp = data.response.weather.highTemp;
+    const lowTemp = data.response.weather.lowTemp;
+
+    image.style.cssText = `background-image: url(${imageURL});`
+    locationName.innerHTML = location;
+    weatherDescription.innerHTML = weatherInfo;
+    weatherIcon.src = weatherIconUrl;
+    weatherTemps.innerHTML = `${highTemp} / ${lowTemp} &deg C`;
+
 }
