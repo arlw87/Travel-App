@@ -1,7 +1,15 @@
 @use "variables";
 $inputWidth: 85%;
 $padding: 5px;
-$sections-width-small-device: 95vw;
+$sections-width-small-device: 90vw;
+$sections-width-medium-mobile: 80vw;
+
+//text size
+$result-text-small: 1.3rem;
+$result-text-large: 2rem;
+
+//images
+$imageWidth-large: 55%;
 
 #form-section {
   height: 100vh;
@@ -21,10 +29,15 @@ $sections-width-small-device: 95vw;
 
     @media (min-width: variables.$mobileLarge) {
       font-size: 3.5em;
+      width: $sections-width-medium-mobile;
     }
 
     @media (min-width: variables.$small-laptop) {
       font-size: 4em;
+    }
+
+    @media (min-width: variables.$tablet) {
+      width: 90%;
     }
 
     em {
@@ -44,6 +57,16 @@ $sections-width-small-device: 95vw;
     font-size: 1.5rem;
     text-align: center;
     margin: 0 0 2vh 0;
+
+    @media (min-width: variables.$mobileLarge) {
+      width: $sections-width-medium-mobile;
+      max-width: 340px;
+    }
+
+    @media (min-width: variables.$tablet) {
+      max-width: none;
+      width: 85%;
+    }
 
     @media (min-width: variables.$small-laptop) {
       flex-direction: row;
@@ -152,32 +175,71 @@ $sections-width-small-device: 95vw;
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  //height: 55vh;
+
+  @media (min-width: variables.$mobileLarge) {
+    width: $sections-width-medium-mobile;
+    max-width: 340px;
+  }
+
+  @media (min-width: variables.$tablet) {
+    max-width: none;
+    width: 85%;
+    flex-direction: row;
+  }
+
+  @media (min-width: variables.$medium-laptop) {
+    max-width: 1300px;
+  }
 
   .results-image {
     background-image: url(../media/static/testImage.jpg);
-    background-position: left;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 27vh;
+    height: 220px;
 
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
 
-    .testHeader {
+    @media (min-width: variables.$tablet) {
+      max-width: none;
+      width: 60%;
+      height: auto;
+    }
+
+    @media (min-width: variables.$small-laptop) {
+      width: $imageWidth-large;
+    }
+
+    .locationHeader {
       background-color: white;
       font-weight: 300;
       font-size: 2.5rem;
       padding: 0 2%;
+
+      @media (min-width: variables.$small-laptop) {
+        font-size: 3.5rem;
+      }
     }
   }
 
   .results-text {
-    height: 30vh;
+    height: 240px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    @media (min-width: variables.$tablet) {
+      width: 40%;
+      height: auto;
+      height: 40vh;
+    }
+
+    @media (min-width: variables.$small-laptop) {
+      width: 100% - $imageWidth-large;
+      height: 50vh;
+    }
 
     .results-divider {
       //border: 1px solid grey;
@@ -186,18 +248,10 @@ $sections-width-small-device: 95vw;
       width: 80%;
       margin: 0 auto;
     }
-
-    .location {
-      margin: 0;
-      text-align: center;
-      font-weight: variables.$textThin;
-      font-size: 2.5em;
-    }
   }
 
   button {
     width: 100%;
-    //margin: auto auto 0 auto;
     font-size: 1.5em;
     background-color: rgba(245, 81, 66, 0.5);
     border: none;
@@ -208,17 +262,26 @@ $sections-width-small-device: 95vw;
 
 .weather-section {
   display: flex;
-  //height: 70%;
   //border: 1px solid blue;
 
+  //   @media (min-width: variables.$tablet) {
+  //     margin: 0 0 auto 0;
+  //     justify-content: center;
+  //   }
+
+  @media (min-width: variables.$tablet) {
+    flex-direction: column;
+    align-items: center;
+  }
+
   .weather-icon {
-    // background-image: url(https://www.weatherbit.io/static/img/icons/c02d.png);
-    // background-position: top;
-    // background-repeat: no-repeat;
-    // background-size: contain;
-    width: 45%;
+    max-width: 160px;
     height: auto;
-    //border: 1px solid black;
+
+    @media (min-width: variables.$small-laptop) {
+      width: 160px;
+      height: auto;
+    }
   }
 
   .weather-details {
@@ -231,11 +294,21 @@ $sections-width-small-device: 95vw;
     h3 {
       //border: 1px solid red;
       font-weight: variables.$textThin;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       font-size: 1.3rem;
       margin: 0 0 10px 0;
+      text-align: center;
+
+      @media (min-width: variables.$tablet) {
+        width: auto;
+      }
+
+      @media (min-width: variables.$small-laptop) {
+        font-size: $result-text-large;
+      }
+    }
+
+    @media (min-width: variables.$tablet) {
+      padding: 0;
     }
   }
 }
@@ -245,6 +318,10 @@ $sections-width-small-device: 95vw;
   //border: 1px solid red;
   align-items: center;
 
+  @media (min-width: variables.$tablet) {
+    justify-content: center;
+  }
+
   img {
     height: 30px;
     width: auto;
@@ -252,8 +329,12 @@ $sections-width-small-device: 95vw;
 
   h4 {
     margin: 0 5%;
-    font-size: 1.3rem;
+    font-size: $result-text-small;
     font-weight: 300;
+
+    @media (min-width: variables.$small-laptop) {
+      font-size: $result-text-large;
+    }
   }
 }
 
@@ -263,13 +344,26 @@ $sections-width-small-device: 95vw;
   display: flex;
   justify-content: center;
   padding: 5px;
-  font-size: 1.3rem;
+  font-size: $result-text-small;
   font-weight: 300;
   margin: 1vh 0 0 0;
+
+  //   @media (min-width: variables.$tablet) {
+  //     margin: auto 0 0 0;
+  //   }
+
+  @media (min-width: variables.$small-laptop) {
+    font-size: $result-text-large;
+    margin: 3vh 0 0 0;
+  }
 
   img {
     height: 25px;
     width: auto;
+
+    @media (min-width: variables.$small-laptop) {
+      height: 40px;
+    }
   }
 
   p {
