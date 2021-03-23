@@ -18,6 +18,21 @@ searchBtn.addEventListener('click', (event) => {
         date: date
     }
 
+    //determine if this is the first search or not
+    if (isFirstSearch()){
+        console.log('first search');
+        displayLoaderSpinnerFirstSearch();
+    } else {
+        //not first search
+        console.log('Not first search');
+        //remove results and show non translated spinner
+        hideResultsCard();
+        displayLoaderSpinner();
+    }
+
+
+    
+
     postData('http://localhost:8000/query', sendObj)
         .then(result => displayResults(result))
         .catch((error) => {
@@ -32,8 +47,6 @@ searchBtn.addEventListener('click', (event) => {
  * @param {object} data 
  */
  const postData = async(url, data) => {
-
-    displayLoaderSpinner();
 
     const response = await fetch(url, {
         method: 'POST',
@@ -51,7 +64,7 @@ searchBtn.addEventListener('click', (event) => {
     }
 }
 
-const displayLoaderSpinner = () => {
+const displayLoaderSpinnerFirstSearch = () => {
     const loader = document.querySelector('.loader');
     loader.classList.add('display-flex');
     loader.classList.remove('display-none');
@@ -61,6 +74,19 @@ const hideLoaderSpinner = () => {
     const loader = document.querySelector('.loader');
     loader.classList.remove('display-flex');
     loader.classList.add('display-none');
+}
+
+const displayLoaderSpinner = () => {
+
+    const loader = document.querySelector('.loader');
+    loader.classList.add('display-flex');
+    loader.classList.remove('display-none');
+
+    if (loader.classList.contains('loader-animation-translate-rotate')){
+        loader.classList.remove('loader-animation-translate-rotate');
+        loader.classList.add('loader-animation-rotate');
+    }
+
 }
 
 const displayResults = (data) => {
@@ -93,21 +119,45 @@ const displayResults = (data) => {
     weatherIcon.src = weatherIconUrl;
     weatherTemps.innerHTML = `${highTemp} / ${lowTemp} &deg C`;
 
-    hideLoaderSpinner();
+    //if the form has transformEndPosition class then a search has already occured
 
+
+    if (isFirstSearch()){
+        document.querySelector('form').classList.add('transformEndPosition');
+        document.querySelector('#form-section > h2').classList.add('transformEndPosition');
+    
+        document.querySelector('form').classList.remove('transformStartPosition');
+        document.querySelector('#form-section > h2').classList.remove('transformStartPosition');
+    } else {
+        displayResultsCard();
+    }
+
+    hideLoaderSpinner();
     //display the results card
     //document.querySelector('.results').classList.remove('display-none');
     //document.querySelector('.results').classList.add('display-flex');
-    document.querySelector('form').classList.add('transformEndPosition');
-    document.querySelector('#form-section > h2').classList.add('transformEndPosition');
-
-    document.querySelector('form').classList.remove('transformStartPosition');
-    document.querySelector('#form-section > h2').classList.remove('transformStartPosition');
 }
 
 //set up some animation
 document.querySelector('form').addEventListener('animationend', (event)=>{
     console.log('Animation has ended');
+    displayResultsCard();
+});
+
+//display results
+const displayResultsCard = () => {
     document.querySelector('.results').classList.remove('display-none');
     document.querySelector('.results').classList.add('display-flex');
-});
+}
+
+//hide results
+const hideResultsCard = () => {
+    document.querySelector('.results').classList.add('display-none');
+    document.querySelector('.results').classList.remove('display-flex');
+}
+
+//determine if this is first search or the not
+//first search has different animation to the next searchs
+const isFirstSearch = () => {
+    return document.querySelector('form').classList.contains('transformStartPosition');
+}

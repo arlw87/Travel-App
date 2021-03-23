@@ -448,7 +448,6 @@ $translateAmount: 0.25 * $sectionHeight;
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  animation: spin 2s linear infinite;
 
   @media (min-width: variables.$tablet) {
     width: 60px;
@@ -457,13 +456,30 @@ $translateAmount: 0.25 * $sectionHeight;
   //transform: translateX(100px);
 }
 
+.loader-animation-translate-rotate {
+  animation: spinTranslate 2s linear infinite;
+}
+
+.loader-animation-rotate {
+  animation: spin 2s linear infinite;
+}
+
 //translate Y has to be done in the animation as if multiple
 //transforms apply one will overide the other
-@keyframes spin {
+@keyframes spinTranslate {
   0% {
     transform: translateY($translateAmount) rotate(0deg);
   }
   100% {
     transform: translateY($translateAmount) rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
