@@ -11,14 +11,18 @@ $result-text-large: 2rem;
 //images
 $imageWidth-large: 55%;
 
+$sectionHeight: 100vh;
+$translateAmount: 0.25 * $sectionHeight;
+
 #form-section {
-  height: 100vh;
+  height: $sectionHeight;
   width: 100vw;
   background-color: #eeeeee;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  padding-top: 5%;
 
   > h2 {
     width: $sections-width-small-device;
@@ -171,10 +175,12 @@ $imageWidth-large: 55%;
 }
 
 .results {
+  //no display property as this is handle be the disply-none and .display-flex
+  //classes to allow for the results to be animated in
   width: $sections-width-small-device;
   background-color: #fff;
-  display: flex;
   flex-direction: column;
+  margin-top: 2%;
 
   @media (min-width: variables.$mobileLarge) {
     width: $sections-width-medium-mobile;
@@ -368,5 +374,49 @@ $imageWidth-large: 55%;
 
   p {
     margin: 0;
+  }
+}
+
+//For form animation
+//Control if result section is visible or not
+.display-flex {
+  display: flex;
+  animation: flexIn 2s;
+  opacity: 1;
+}
+
+.display-none {
+  display: none;
+  opacity: 0;
+}
+
+@keyframes flexIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+//The title and the form in the form section of the page are set to flex start which means they are
+//at the top of the section. A class of transformStartPosition is able to those elements so that they
+//appear in the center of the section. Once a user completes a search and the results come back the
+//elements will animate back to the top and a results pane will fade into view
+.transformStartPosition {
+  transform: translateY($translateAmount);
+}
+
+.transformEndPosition {
+  animation: transformAnimation 2s;
+  transform: translateY(0);
+}
+
+@keyframes transformAnimation {
+  0% {
+    transform: translateY($translateAmount);
+  }
+  100% {
+    transform: translateY(0);
   }
 }

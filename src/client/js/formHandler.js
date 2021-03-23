@@ -79,4 +79,19 @@ const displayResults = (data) => {
     weatherIcon.src = weatherIconUrl;
     weatherTemps.innerHTML = `${highTemp} / ${lowTemp} &deg C`;
 
+    //display the results card
+    //document.querySelector('.results').classList.remove('display-none');
+    //document.querySelector('.results').classList.add('display-flex');
+    document.querySelector('form').classList.add('transformEndPosition');
+    document.querySelector('#form-section > h2').classList.add('transformEndPosition');
+
+    document.querySelector('form').classList.remove('transformStartPosition');
+    document.querySelector('#form-section > h2').classList.remove('transformStartPosition');
 }
+
+//set up some animation
+document.querySelector('form').addEventListener('animationend', (event)=>{
+    console.log('Animation has ended');
+    document.querySelector('.results').classList.remove('display-none');
+    document.querySelector('.results').classList.add('display-flex');
+});
