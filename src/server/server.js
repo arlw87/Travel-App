@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const fetch = require('node-fetch');
 const dotenv = require('dotenv');
+const timeunit = require('timeunit');
 
 dotenv.config();
 
@@ -32,10 +33,14 @@ app.post(`/query`, (req, res) => {
     const location = req.body.destination;
     const date = req.body.date;
 
+    //get days to trip
+    const daysToTrip = calculateDays(date);
+
     const clientResponseObject = {
         weather: undefined,
         imageUrl: undefined,
-        location: undefined
+        location: undefined,
+        daysToTrip: daysToTrip
     };
 
     const geonameUrl = geoNamesUrl(geonameUsername, location);
@@ -214,4 +219,17 @@ const fetchData = async (url, method) => {
             console.log(error);
             throw (error);
         }
+}
+
+const calculateDays = (date) => {
+    //check for blank date
+    if (date === ''){
+        return 0;
+    }
+    //calculate the difference in ms between the parameter date
+    //and now, round up
+    const diffInMs = Date.parse(date) - Date.now();
+    const diffInDays = Math.ceil(timeunit.milliseconds.toDays(diffInMs));
+
+    return diffInDays;
 }

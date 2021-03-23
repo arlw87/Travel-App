@@ -97,6 +97,7 @@ const displayResults = (data) => {
     //get the elements to update
     const image = document.querySelector('.results-image'); //location image
     const locationName = document.querySelector('.locationHeader'); //location name
+    const daysElement = document.querySelector('.time-to-trip > p'); //days until trip
     
     //weather details
     const weatherDescription = document.querySelector('.weather-details > h3');
@@ -106,6 +107,7 @@ const displayResults = (data) => {
     //extract the results from the object
     const imageURL = data.response.imageUrl;
     const location = data.response.location.place;
+    const daysToTrip = data.response.daysToTrip;
 
     //weather
     const weatherInfo = data.response.weather.description;
@@ -118,6 +120,8 @@ const displayResults = (data) => {
     weatherDescription.innerHTML = weatherInfo;
     weatherIcon.src = weatherIconUrl;
     weatherTemps.innerHTML = `${highTemp} / ${lowTemp} &deg C`;
+    daysElement.innerHTML = `${daysToTrip} days until your trip`
+
 
     //if the form has transformEndPosition class then a search has already occured
 
