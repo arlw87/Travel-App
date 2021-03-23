@@ -33,6 +33,8 @@ searchBtn.addEventListener('click', (event) => {
  */
  const postData = async(url, data) => {
 
+    displayLoaderSpinner();
+
     const response = await fetch(url, {
         method: 'POST',
         headers:{
@@ -47,6 +49,18 @@ searchBtn.addEventListener('click', (event) => {
     }catch(error){
         throw Error(error);
     }
+}
+
+const displayLoaderSpinner = () => {
+    const loader = document.querySelector('.loader');
+    loader.classList.add('display-flex');
+    loader.classList.remove('display-none');
+}
+
+const hideLoaderSpinner = () => {
+    const loader = document.querySelector('.loader');
+    loader.classList.remove('display-flex');
+    loader.classList.add('display-none');
 }
 
 const displayResults = (data) => {
@@ -78,6 +92,8 @@ const displayResults = (data) => {
     weatherDescription.innerHTML = weatherInfo;
     weatherIcon.src = weatherIconUrl;
     weatherTemps.innerHTML = `${highTemp} / ${lowTemp} &deg C`;
+
+    hideLoaderSpinner();
 
     //display the results card
     //document.querySelector('.results').classList.remove('display-none');

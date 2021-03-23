@@ -6,13 +6,16 @@ $sections-width-medium-mobile: 80vw;
 
 //text size
 $result-text-small: 1.3rem;
-$result-text-large: 2rem;
+$result-text-large: 1.8rem;
+$result-text-extra-large: 2rem;
 
 //images
 $imageWidth-large: 55%;
 
 $sectionHeight: 100vh;
 $translateAmount: 0.25 * $sectionHeight;
+
+//
 
 #form-section {
   height: $sectionHeight;
@@ -22,18 +25,22 @@ $translateAmount: 0.25 * $sectionHeight;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 5%;
+  padding-top: 3%;
 
   > h2 {
     width: $sections-width-small-device;
     font-size: 2em;
     font-weight: 300;
     text-align: center;
-    margin: 0 0 5vh 0;
+    margin: 0 0 3% 0;
 
     @media (min-width: variables.$mobileLarge) {
-      font-size: 3.5em;
+      font-size: 2.2em;
       width: $sections-width-medium-mobile;
+    }
+
+    @media (min-width: variables.$tablet) {
+      font-size: 3em;
     }
 
     @media (min-width: variables.$small-laptop) {
@@ -45,7 +52,7 @@ $translateAmount: 0.25 * $sectionHeight;
     }
 
     em {
-      color: rgb(246, 44, 25);
+      color: variables.$red-1;
     }
   }
 
@@ -53,14 +60,14 @@ $translateAmount: 0.25 * $sectionHeight;
     background-color: #fff;
     border-radius: 2px;
     width: $sections-width-small-device;
-    height: 35vh;
+    height: 30vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
     text-align: center;
-    margin: 0 0 2vh 0;
+    margin-bottom: 3%;
 
     @media (min-width: variables.$mobileLarge) {
       width: $sections-width-medium-mobile;
@@ -88,9 +95,9 @@ $translateAmount: 0.25 * $sectionHeight;
       width: $inputWidth;
       margin: 1em 0 0 0;
       font-size: 1em;
-      background-color: rgba(245, 81, 66, 0.5);
+      background-color: variables.$red-2;
       border: none;
-      color: rgb(246, 44, 25);
+      color: variables.$red-1;
 
       @media (min-width: variables.$small-laptop) {
         width: 12%;
@@ -180,7 +187,6 @@ $translateAmount: 0.25 * $sectionHeight;
   width: $sections-width-small-device;
   background-color: #fff;
   flex-direction: column;
-  margin-top: 2%;
 
   @media (min-width: variables.$mobileLarge) {
     width: $sections-width-medium-mobile;
@@ -202,7 +208,7 @@ $translateAmount: 0.25 * $sectionHeight;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 220px;
+    height: 180px;
 
     display: flex;
     justify-content: flex-start;
@@ -259,9 +265,9 @@ $translateAmount: 0.25 * $sectionHeight;
   button {
     width: 100%;
     font-size: 1.5em;
-    background-color: rgba(245, 81, 66, 0.5);
+    background-color: variables.$red-2;
     border: none;
-    color: rgb(246, 44, 25);
+    color: variables.$red-1;
     padding: 1% 0;
   }
 }
@@ -311,6 +317,10 @@ $translateAmount: 0.25 * $sectionHeight;
       @media (min-width: variables.$small-laptop) {
         font-size: $result-text-large;
       }
+
+      @media (min-width: variables.$medium-laptop) {
+        font-size: $result-text-extra-large;
+      }
     }
 
     @media (min-width: variables.$tablet) {
@@ -341,6 +351,10 @@ $translateAmount: 0.25 * $sectionHeight;
     @media (min-width: variables.$small-laptop) {
       font-size: $result-text-large;
     }
+
+    @media (min-width: variables.$medium-laptop) {
+      font-size: $result-text-extra-large;
+    }
   }
 }
 
@@ -361,6 +375,10 @@ $translateAmount: 0.25 * $sectionHeight;
   @media (min-width: variables.$small-laptop) {
     font-size: $result-text-large;
     margin: 3vh 0 0 0;
+  }
+
+  @media (min-width: variables.$medium-laptop) {
+    font-size: $result-text-extra-large;
   }
 
   img {
@@ -418,5 +436,34 @@ $translateAmount: 0.25 * $sectionHeight;
   }
   100% {
     transform: translateY(0);
+  }
+}
+
+//loader class
+.loader {
+  //display: flex;
+  //margin: 0 auto;
+  border: 16px solid #fff; /* Light grey */
+  border-top: 16px solid variables.$red-1;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 2s linear infinite;
+
+  @media (min-width: variables.$tablet) {
+    width: 60px;
+    height: 60px;
+  }
+  //transform: translateX(100px);
+}
+
+//translate Y has to be done in the animation as if multiple
+//transforms apply one will overide the other
+@keyframes spin {
+  0% {
+    transform: translateY($translateAmount) rotate(0deg);
+  }
+  100% {
+    transform: translateY($translateAmount) rotate(360deg);
   }
 }
