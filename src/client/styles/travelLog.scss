@@ -247,4 +247,16 @@ $translateAmount: 0.25 * $sectionHeight;
     width: 25%;
     height: auto;
   }
+
+  &:hover {
+    // border: 4px variables.$red-2 solid;
+    // height: 412px;
+    font-weight: 600;
+    // text-decoration: underline;
+    img {
+      transform: scale(1.1, 1.1);
+    }
+  }
+
+  cursor: pointer;
 }

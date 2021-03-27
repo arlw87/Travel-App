@@ -41,7 +41,8 @@ addTripButton.addEventListener('click', (event)=> {
 
     //scroll to the my trip section
     myTripSection.scrollIntoView({
-        behavior: "smooth"
+        behavior: "smooth",
+        alignToTop: false
     });
 
     //reset result screen
@@ -94,7 +95,10 @@ const addTrip = (location, timeToTrip, weatherIcon, weatherDescription, highTemp
     });
 
     //add card to dom
-    document.querySelector('.travel-cards').insertAdjacentElement("beforeend", tripCard);
+    //document.querySelector('.travel-cards').insertAdjacentElement("beforeend", tripCard);
+    const addNewTripCard = document.querySelector('.add-new-trip');
+    addNewTripCard.parentElement.insertBefore(tripCard, addNewTripCard);
+
 }
 
 
@@ -120,5 +124,10 @@ const resetResults = () => {
 }
 
 //Add New Trip Card Button
-
+document.querySelector('.add-new-trip').addEventListener('click', (event) => {
+    //simpl;y scroll up to the form section
+    document.querySelector('#form-section').scrollIntoView({
+        behavior: "smooth"
+    });
+});
 
