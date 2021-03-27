@@ -62,15 +62,22 @@ const addTrip = (location, timeToTrip, weatherIcon, weatherDescription, highTemp
           </div>
         </div>
       </div>
-      <button>Remove Trip</button>
+      <button class="remove-trip" >Remove Trip</button>
     </div>
     </div>`;
 
     let tripCard = htmlToElement(htmlString);
-    tripCard.querySelector('.card-image').style.cssText = `background-image: url(${imageURL});`
+    tripCard.querySelector('.card-image').style.cssText = `background-image: url(${imageURL});`;
+
+    //add the remove card event listener
+    tripCard.querySelector('.remove-trip').addEventListener('click', (event)=> {
+        console.log('I am clicking a delete button');
+        event.target.parentElement.parentElement.remove();
+    });
 
     //add card to dom
     document.querySelector('.travel-cards').insertAdjacentElement("beforeend", tripCard);
+
 }
 
 
@@ -81,3 +88,4 @@ const htmlToElement = (htmlString) => {
     template.innerHTML = html; //add the html string
     return template.content.firstChild; //return the content inside the template which is an element
 }
+
