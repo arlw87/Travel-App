@@ -1,8 +1,6 @@
 @use "variables";
 $inputWidth: 85%;
 $padding: 5px;
-$sections-width-small-device: 90vw;
-$sections-width-medium-mobile: 80vw;
 
 //text size
 $result-text-small: 1.3rem;
@@ -28,7 +26,7 @@ $translateAmount: 0.25 * $sectionHeight;
   padding-top: 3%;
 
   > h2 {
-    width: $sections-width-small-device;
+    width: variables.$sections-width-small-device;
     font-size: 2em;
     font-weight: 300;
     text-align: center;
@@ -36,7 +34,7 @@ $translateAmount: 0.25 * $sectionHeight;
 
     @media (min-width: variables.$mobileLarge) {
       font-size: 2.2em;
-      width: $sections-width-medium-mobile;
+      width: variables.$sections-width-medium-mobile;
     }
 
     @media (min-width: variables.$tablet) {
@@ -59,7 +57,7 @@ $translateAmount: 0.25 * $sectionHeight;
   form {
     background-color: #fff;
     border-radius: 2px;
-    width: $sections-width-small-device;
+    width: variables.$sections-width-small-device;
     height: 30vh;
     display: flex;
     flex-direction: column;
@@ -70,7 +68,7 @@ $translateAmount: 0.25 * $sectionHeight;
     margin-bottom: 3%;
 
     @media (min-width: variables.$mobileLarge) {
-      width: $sections-width-medium-mobile;
+      width: variables.$sections-width-medium-mobile;
       max-width: 340px;
     }
 
@@ -184,12 +182,12 @@ $translateAmount: 0.25 * $sectionHeight;
 .results {
   //no display property as this is handle be the disply-none and .display-flex
   //classes to allow for the results to be animated in
-  width: $sections-width-small-device;
+  width: variables.$sections-width-small-device;
   background-color: #fff;
   flex-direction: column;
 
   @media (min-width: variables.$mobileLarge) {
-    width: $sections-width-medium-mobile;
+    width: variables.$sections-width-medium-mobile;
     max-width: 340px;
   }
 

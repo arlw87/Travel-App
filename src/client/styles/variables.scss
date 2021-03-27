@@ -14,3 +14,10 @@ $textThin: 300;
 //colors
 $red-1: rgb(246, 44, 25);
 $red-2: rgba(245, 81, 66, 0.5);
+
+//section dimensions
+$sections-width-small-device: 90vw;
+$sections-width-medium-mobile: 80vw;
+$sections-width-tablet: 90vw;
+$sectionHeight: 100vh;
+$translateAmount: 0.25 * $sectionHeight;

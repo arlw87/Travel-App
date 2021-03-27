@@ -1,0 +1,206 @@
+@use "variables";
+
+$inputWidth: 85%;
+$padding: 5px;
+
+//text size
+$result-text-small: 1.3rem;
+$result-text-large: 1.8rem;
+$result-text-extra-large: 2rem;
+
+//images
+$imageWidth-large: 55%;
+
+$sectionHeight: 100vh;
+$translateAmount: 0.25 * $sectionHeight;
+
+#travel-log {
+  min-height: 100vh;
+  width: 100vw;
+  //border: 1px solid black;
+  background-color: #f6f5f5;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  > h2 {
+    width: variables.$sections-width-small-device;
+    font-size: 2em;
+    font-weight: 300;
+    text-align: center;
+    margin: 0 0 3% 0;
+
+    @media (min-width: variables.$mobileLarge) {
+      font-size: 2.2em;
+      width: variables.$sections-width-medium-mobile;
+    }
+
+    @media (min-width: variables.$tablet) {
+      font-size: 3em;
+    }
+
+    @media (min-width: variables.$small-laptop) {
+      font-size: 4em;
+    }
+
+    @media (min-width: variables.$tablet) {
+      width: 90%;
+    }
+
+    em {
+      color: variables.$red-1;
+    }
+  }
+}
+
+.travel-cards {
+  //grid system
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: auto;
+  width: variables.$sections-width-small-device;
+  grid-row-gap: 2vh;
+
+  @media (min-width: variables.$mobileLarge) {
+    width: variables.$sections-width-medium-mobile;
+  }
+
+  @media (min-width: variables.$tablet) {
+    width: variables.$sections-width-tablet;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 5vw;
+    grid-row-gap: 5vw;
+  }
+
+  @media (min-width: variables.$small-laptop) {
+    width: variables.$sections-width-tablet;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 30px;
+    grid-row-gap: 30px;
+  }
+
+  @media (min-width: variables.$medium-laptop) {
+    max-width: 1197px;
+  }
+}
+
+.travel-card {
+  background-color: #fff;
+  flex-direction: column;
+  width: 100%;
+
+  .card-image {
+    background-image: url(../media/static/testImage.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 180px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    .locationHeader {
+      background-color: white;
+      font-weight: 300;
+      font-size: 2.5rem;
+      padding: 0 2%;
+
+      @media (min-width: variables.$small-laptop) {
+        font-size: 3rem;
+      }
+    }
+  }
+
+  .card-text {
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .card-divider {
+      //border: 1px solid grey;
+      background-color: lightgray;
+      height: 2px;
+      width: 80%;
+      margin: 0 auto;
+    }
+  }
+
+  button {
+    width: 100%;
+    font-size: 1.5em;
+    background-color: variables.$red-2;
+    border: none;
+    color: variables.$red-1;
+    padding: 1% 0;
+  }
+}
+
+.card-weather-section {
+  display: flex;
+  justify-content: center;
+
+  .card-weather-icon {
+    max-width: 160px;
+    height: auto;
+  }
+
+  .card-weather-details {
+    //border: 1px solid black;
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 1vw 0 0;
+    h3 {
+      //border: 1px solid red;
+      font-weight: variables.$textThin;
+      font-size: 1.3rem;
+      margin: 0 0 10px 0;
+      text-align: center;
+    }
+
+    @media (min-width: variables.$tablet) {
+      padding: 0;
+    }
+  }
+}
+
+.card-temperature-details {
+  display: flex;
+  //border: 1px solid red;
+  align-items: center;
+
+  img {
+    height: 30px;
+    width: auto;
+  }
+
+  h4 {
+    margin: 0 5%;
+    font-size: $result-text-small;
+    font-weight: 300;
+  }
+}
+
+.card-time-to-trip {
+  //border: 1px solid red;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  font-size: $result-text-small;
+  font-weight: 300;
+  margin: 1vh 0 0 0;
+
+  img {
+    height: 25px;
+    width: auto;
+  }
+
+  p {
+    margin: 0;
+  }
+}
