@@ -1,3 +1,7 @@
+//images
+import tempIcon from "../media/static/temperature_icon.png";
+import clockIcon from "../media/static/clock_icon.png";
+
 //Control all actions to do with planning trip
 let latestResults = null;
 
@@ -44,7 +48,7 @@ const addTrip = (location, timeToTrip, weatherIcon, weatherDescription, highTemp
     </div>
     <div class ="card-text">
       <div class="card-time-to-trip">
-        <img src="../media/static/clock_icon.png">
+        <img src=${clockIcon}>
         <p>${timeToTrip} days until trip</p>
       </div>
       <div class="card-divider"></div>
@@ -53,7 +57,7 @@ const addTrip = (location, timeToTrip, weatherIcon, weatherDescription, highTemp
         <div class="card-weather-details">
           <h3>${weatherDescription}</h3>
           <div class="card-temperature-details">
-            <img class="card-temperature-details-image" src="../media/static/temperature_icon.png">
+            <img class="card-temperature-details-image" src=${tempIcon}>
             <h4 class="card-temperature-details-temps">${highTemp} / ${lowTemp} &deg C</h4>
           </div>
         </div>
