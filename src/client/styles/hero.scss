@@ -26,7 +26,7 @@ $delay-Time: 4s;
   transform: scaleX(-1);
 
   h1 {
-    font-size: calc(100vw/7);
+    font-size: calc(100vw / 7);
     line-height: 1em;
     opacity: 1;
     font-weight: 300;
@@ -61,7 +61,7 @@ $delay-Time: 4s;
     animation-delay: 2s;
     animation-iteration-count: infinite;
     opacity: 0;
-    margin: 20vh 0 0 0;
+    margin: 15vh 0 0 0;
 
     width: 300px;
 
@@ -72,8 +72,6 @@ $delay-Time: 4s;
     @media (min-width: variables.$small-laptop) {
       margin: 0;
     }
-
-
 
     img {
       height: 1em;
@@ -87,7 +85,7 @@ $delay-Time: 4s;
 
     h2 {
       font-size: 2em;
-      font-weight: 300;
+      font-weight: 500;
       margin: 0;
 
       @media (min-width: variables.$tablet) {

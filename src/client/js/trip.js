@@ -29,7 +29,7 @@ addTripButton.addEventListener('click', (event)=> {
     const highTemp = latestResults.response.weather.highTemp;
     const lowTemp = latestResults.response.weather.lowTemp;
     
-    addTrip(location, daysToTrip, weatherIconUrl, weatherInfo, highTemp, lowTemp, imageURL);
+   const newCardElement = addTrip(location, daysToTrip, weatherIconUrl, weatherInfo, highTemp, lowTemp, imageURL);
 
     //if this is the first trip to add then display the my trip section
     //remove the display none class and add the display flex class
@@ -40,9 +40,15 @@ addTripButton.addEventListener('click', (event)=> {
     }
 
     //scroll to the my trip section
-    myTripSection.scrollIntoView({
+    // myTripSection.scrollIntoView({
+    //     behavior: "smooth",
+    //     block: "end"
+    // });
+    //scroll to the newly added card
+    newCardElement.scrollIntoView({
         behavior: "smooth",
-        alignToTop: false
+        block: "start",
+        inline: "start"
     });
 
     //reset result screen
@@ -98,6 +104,8 @@ const addTrip = (location, timeToTrip, weatherIcon, weatherDescription, highTemp
     //document.querySelector('.travel-cards').insertAdjacentElement("beforeend", tripCard);
     const addNewTripCard = document.querySelector('.add-new-trip');
     addNewTripCard.parentElement.insertBefore(tripCard, addNewTripCard);
+
+    return tripCard;
 
 }
 
