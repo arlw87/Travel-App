@@ -14,15 +14,24 @@ $imageWidth-large: 55%;
 $sectionHeight: 100vh;
 $translateAmount: 0.25 * $sectionHeight;
 
+.section-display-none {
+  display: none;
+}
+
+.section-display-flex {
+  display: flex;
+}
+
 #travel-log {
-  min-height: 100vh;
+  min-height: 94vh;
   width: 100vw;
   //border: 1px solid black;
   background-color: #f6f5f5;
-  display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  padding-bottom: 3vh;
+  padding-top: 3vh;
 
   > h2 {
     width: variables.$sections-width-small-device;
@@ -85,7 +94,22 @@ $translateAmount: 0.25 * $sectionHeight;
   }
 }
 
+@keyframes fadeCardIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .travel-card {
+  //fade the travel card in
+  animation-name: fadeCardIn;
+  animation-duration: 3s;
+  animation-timing-function: ease-in;
+  opacity: 1;
+
   background-color: #fff;
   flex-direction: column;
   width: 100%;
@@ -202,5 +226,25 @@ $translateAmount: 0.25 * $sectionHeight;
 
   p {
     margin: 0;
+  }
+}
+
+.add-new-trip {
+  border: 2px variables.$red-2 solid;
+  //416 px plus 2px + 2px for border is the height of the results card
+  height: 416px;
+  width: 100%;
+  color: variables.$red-2;
+  font-weight: 300;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: $result-text-large;
+
+  img {
+    width: 25%;
+    height: auto;
   }
 }

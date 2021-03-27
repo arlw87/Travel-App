@@ -163,7 +163,7 @@ const displayResultsCard = () => {
 }
 
 //hide results
-const hideResultsCard = () => {
+export const hideResultsCard = () => {
     document.querySelector('.results').classList.add('display-none');
     document.querySelector('.results').classList.remove('display-flex');
 }

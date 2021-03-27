@@ -2,6 +2,9 @@
 import tempIcon from "../media/static/temperature_icon.png";
 import clockIcon from "../media/static/clock_icon.png";
 
+//help function
+import {hideResultsCard} from "./formHandler";
+
 //Control all actions to do with planning trip
 let latestResults = null;
 
@@ -12,9 +15,6 @@ export const updateResults = (resultsObj) => {
 //Add trip. Click the add trip button on the results form
 const addTripButton = document.querySelector('.results button');
 addTripButton.addEventListener('click', (event)=> {
-    console.log('add trip');
-    console.log('From trip.js');
-    console.log(latestResults);
     
     if (latestResults == null){
         alert('error adding trip results');
@@ -30,6 +30,24 @@ addTripButton.addEventListener('click', (event)=> {
     const lowTemp = latestResults.response.weather.lowTemp;
     
     addTrip(location, daysToTrip, weatherIconUrl, weatherInfo, highTemp, lowTemp, imageURL);
+
+    //if this is the first trip to add then display the my trip section
+    //remove the display none class and add the display flex class
+    const myTripSection = document.querySelector('#travel-log');
+    if (myTripSection.classList.contains('section-display-none')){
+        myTripSection.classList.remove('section-display-none');
+        myTripSection.classList.add('section-display-flex');
+    }
+
+    //scroll to the my trip section
+    myTripSection.scrollIntoView({
+        behavior: "smooth"
+    });
+
+    //reset result screen
+    //delay this so it doesnt display appear instantly, 
+    //spoiling the scroll smooth effect 
+    setTimeout(resetResults, 500);
 });
 
 
@@ -77,7 +95,6 @@ const addTrip = (location, timeToTrip, weatherIcon, weatherDescription, highTemp
 
     //add card to dom
     document.querySelector('.travel-cards').insertAdjacentElement("beforeend", tripCard);
-
 }
 
 
@@ -88,4 +105,20 @@ const htmlToElement = (htmlString) => {
     template.innerHTML = html; //add the html string
     return template.content.firstChild; //return the content inside the template which is an element
 }
+
+/**
+ * From the results card and move the form and heading back to the center
+ */
+const resetResults = () => {
+    //hide the results card
+    hideResultsCard();
+    //moves the heading and form back to the middle of the page
+    document.querySelector('form').classList.remove('transformEndPosition');
+    document.querySelector('#form-section > h2').classList.remove('transformEndPosition');
+    document.querySelector('form').classList.add('transformStartPosition');
+    document.querySelector('#form-section > h2').classList.add('transformStartPosition');
+}
+
+//Add New Trip Card Button
+
 
