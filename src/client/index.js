@@ -1,6 +1,7 @@
 import "./styles/base.scss"
-import "./js/app.js";
+import "./js/app";
 import "./js/formHandler";
+import "./js/trip";
 
 
 //images

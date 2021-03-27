@@ -1,3 +1,5 @@
+import { updateResults } from "./trip";
+
 //handle the form controls
 const searchBtn = document.querySelector('#search');
 
@@ -34,7 +36,13 @@ searchBtn.addEventListener('click', (event) => {
     
 
     postData('http://localhost:8000/query', sendObj)
-        .then(result => displayResults(result))
+        .then(result => {
+            displayResults(result);
+            //send latest results to the trip js file
+            //so they can be used to display if trip is added
+            //to my trips section
+            updateResults(result);
+        })
         .catch((error) => {
             console.log(error);
         });
