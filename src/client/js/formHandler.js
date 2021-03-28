@@ -1,19 +1,27 @@
 import { updateResults } from "./trip";
+import { isValidateDate } from "./validation";
+import { displayError } from "./errorHandling";
 
 //handle the form controls
 const searchBtn = document.querySelector('#search');
 
 searchBtn.addEventListener('click', (event) => {
+
+    console.log('click');
+
     //stop reloading of page
     event.preventDefault();
-
-    //handle form validation here
-    //TODO: user input validation
-
 
     //get the user input data
     const destination = document.querySelector('#destination').value;
     const date = document.querySelector('#date').value;
+    
+    //handle form validation here
+    if (!isValidateDate(date)){
+        console.log('Date in the past');
+        displayError('Date must be in the future');
+        return;
+    }
 
     const sendObj = {
         destination: destination,
@@ -178,3 +186,4 @@ const isFirstSearch = () => {
 const clearForm = ()=>{
     document.querySelector('form').reset();
 }
+

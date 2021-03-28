@@ -25,6 +25,9 @@ $translateAmount: 0.25 * $sectionHeight;
   align-items: center;
   padding-top: 3%;
 
+  //to help position the error handler
+  position: relative;
+
   > h2 {
     width: variables.$sections-width-small-device;
     font-size: 2em;
