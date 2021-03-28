@@ -145,6 +145,7 @@ const displayResults = (data) => {
     }
 
     hideLoaderSpinner();
+    clearForm();
     //display the results card
     //document.querySelector('.results').classList.remove('display-none');
     //document.querySelector('.results').classList.add('display-flex');
@@ -172,4 +173,8 @@ export const hideResultsCard = () => {
 //first search has different animation to the next searchs
 const isFirstSearch = () => {
     return document.querySelector('form').classList.contains('transformStartPosition');
+}
+
+const clearForm = ()=>{
+    document.querySelector('form').reset();
 }
