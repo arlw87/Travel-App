@@ -17,7 +17,7 @@ $translateAmount: 0.25 * $sectionHeight;
 
 #form-section {
   height: $sectionHeight;
-  width: 100vw;
+  //width: 100vw;
   background-color: #eeeeee;
   display: flex;
   flex-direction: column;
@@ -58,7 +58,10 @@ $translateAmount: 0.25 * $sectionHeight;
     background-color: #fff;
     border-radius: 2px;
     width: variables.$sections-width-small-device;
-    height: 30vh;
+    //vh doesnt work when using mobile as screen keyboard shrinks screen and therefore this
+    //form
+    //height: 30vh;
+    height: 245px;
     display: flex;
     flex-direction: column;
     align-items: center;

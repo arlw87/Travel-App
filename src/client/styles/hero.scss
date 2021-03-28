@@ -8,8 +8,9 @@
 $delay-Time: 4s;
 
 #hero-banner {
-  width: 100vw;
+  //width: 100vw;
   height: 100vh;
+  //min-height: -webkit-fill-available;
   background-image: linear-gradient(
       rgba(241, 42, 7, 0.6),
       rgba(218, 245, 66, 0.5)
