@@ -13,6 +13,6 @@ export const isValidateDate = (date) => {
  * Input must be one character or more, not 
  */
 export const isValidationPlaceName = (name) => {
-    const regex = new RegExp('^[a-z][a-z,\\s]*$');
+    const regex = new RegExp('^[a-zA-Z][A-Za-z,\\s]*$');
     return regex.test(name);
 }

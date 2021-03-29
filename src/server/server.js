@@ -48,7 +48,6 @@ app.post(`/query`, (req, res) => {
         .then((result) => {
            return extractGeonamesData(result); 
         }).then((result) => {
-            console.log(result);
             clientResponseObject.location = {
                 place: result.location,
                 country: result.countryName
@@ -57,9 +56,8 @@ app.post(`/query`, (req, res) => {
             //promise not returned until the fetchData is complete
             //fetchData returns a promise
             //a then is not resolved until a value is returned
-            return fetchData(url, 'GET');
+            return fetchData(url, 'GET'); //fetch forecast data
         }).then(result => {
-
             const forecastData = extractWeatherData(result, date);
             clientResponseObject.weather = weatherDataForClient(forecastData);
             //fetch the image url for the client using the place name
@@ -67,29 +65,19 @@ app.post(`/query`, (req, res) => {
             const query = `${clientResponseObject.location.place}, ${clientResponseObject.location.country}`;
             const url = createPixelbayUrl(query, pixelBayApi);
             return fetchData(url, 'GET');
-
         }).then(result => {
-
-            console.log("Pixel Bay Results");
-            //console.log(result);
-
-            //if there are no images for the place name then use the place country
+            //if there are no images for the place name then use just the country
             if (result.total == 0){
                 console.log("No result so search using country");
                 //do another query
                 const url = createPixelbayUrl(clientResponseObject.location.country, pixelBayApi);
                 return fetchData(url, 'GET');
             }
-
             return result;
-
         }).then((result) => {
-
             //get image url 
             const imageUrl = result.hits[0].largeImageURL;
             clientResponseObject.imageUrl = imageUrl;
-
-            console.log(clientResponseObject);
             res.send({
                 status:'complete',
                 response:clientResponseObject
@@ -97,7 +85,7 @@ app.post(`/query`, (req, res) => {
         }).catch((error) => {
             console.log('There has been an error');
             console.log(error);
-            res.send({status:'failure'});
+            res.send({status:'failure', message: "Error retrieving data, please try again"});
         });
 
 });
@@ -125,15 +113,19 @@ const geoNamesUrl = (username, location) => {
  */
 const extractGeonamesData = (dataObj) => {
     console.log(dataObj);
-    const long = dataObj.geonames[0].lng;
-    const lat = dataObj.geonames[0].lat;
-    const location = dataObj.geonames[0].name;
-    const countryName = dataObj.geonames[0].countryName;
-    return {lat: lat,
-            long: long,
-            location: location,
-            countryName: countryName
-        }
+    try{
+        const long = dataObj.geonames[0].lng;
+        const lat = dataObj.geonames[0].lat;
+        const location = dataObj.geonames[0].name;
+        const countryName = dataObj.geonames[0].countryName;
+        return {lat: lat,
+                long: long,
+                location: location,
+                countryName: countryName
+            }
+    } catch(error){
+        throw (error); 
+    }
 }
 
 //weather bit API 
@@ -155,45 +147,62 @@ const forecastWeatherUrl = (positionObj, apiKey) => {
 //day. If the trip is after the next 16 days then use the 16th day forecast. 
 const extractWeatherData = (data, date) => {
 
-    //use the form on client to ensure a previous date is not selected.
-    let weatherData = null;
-    //loop through the data and compare date
-    for (dayData of data.data){
-        if (dayData.datetime == date){
-            console.log('Date Matches!');
-            weatherData = dayData;
-            break;
+    try{
+        //use the form on client to ensure a previous date is not selected.
+        let weatherData = null;
+        //loop through the data and compare date
+        for (dayData of data.data){
+            if (dayData.datetime == date){
+                console.log('Date Matches!');
+                weatherData = dayData;
+                break;
+            }
         }
+        //if the day is beyhond the 16 days of forecast data then send the 16th
+        //day forecast
+        if (weatherData == null){
+            weatherData = data.data[data.data.length - 1];
+        }
+        return(weatherData);
+    } catch (error){
+        console.log('Error processing the weather data');
+        throw (error);
     }
-    //if the day is beyhond the 16 days of forecast data then send the 16th
-    //day forecast
-    if (weatherData == null){
-        weatherData = data.data[data.data.length - 1];
-    }
-
-    console.log(date);
-    return(weatherData);
 }
 
 const weatherDataForClient = (dataObj) => {
 
-    const iconBaseUrl = `https://www.weatherbit.io/static/img/icons/`
+    try{
+        const iconBaseUrl = `https://www.weatherbit.io/static/img/icons/`
 
-    return {
-        highTemp: dataObj.high_temp,
-        lowTemp: dataObj.low_temp,
-        description: dataObj.weather.description,
-        iconUrl: `${iconBaseUrl}${dataObj.weather.icon}.png`
+        return {
+            highTemp: dataObj.high_temp,
+            lowTemp: dataObj.low_temp,
+            description: dataObj.weather.description,
+            iconUrl: `${iconBaseUrl}${dataObj.weather.icon}.png`
+        }
+    } catch (error){
+        console.log('Error parsing weather data for client');
+        console.log(error);
+        throw (error);
     }
+
 }
 
 //PixelBay
 const createPixelbayUrl = (query, apiKey) => {
-    const baseUrl = `https://pixabay.com/api/`;
-    const url = `${baseUrl}?key=${apiKey}&q=${query}&image_type=photo`
-    console.log('pixelBay url');
-    console.log(url);
-    return url;
+    try{
+        const baseUrl = `https://pixabay.com/api/`;
+        const url = `${baseUrl}?key=${apiKey}&q=${query}&image_type=photo`
+        console.log('pixelBay url');
+        console.log(url);
+        return url;
+    } catch (error){
+        console.log('Error creating pixelBay url');
+        console.log(error);
+        throw error;
+    }
+
 }
 
 
@@ -216,7 +225,6 @@ const fetchData = async (url, method) => {
             }
             return data;
         } catch(error){
-            console.log(error);
             throw (error);
         }
 }

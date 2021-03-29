@@ -46,11 +46,19 @@ searchBtn.addEventListener('click', (event) => {
         displayLoaderSpinner();
     }
 
-
-    
-
+ 
     postData('http://localhost:8000/query', sendObj)
         .then(result => {
+            console.log('results');
+            console.log(result);
+            //check to see if there was an error response
+            if (result.status==='failure'){
+                displayError(result.message);
+                hideLoaderSpinner();
+                clearForm();
+                return;
+            }
+
             displayResults(result);
             //send latest results to the trip js file
             //so they can be used to display if trip is added
