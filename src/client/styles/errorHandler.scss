@@ -2,8 +2,8 @@
 
 //error handler box
 .error-handler-message-box {
-  height: 40%;
-  width: 90%;
+  height: 325px;
+  width: 330px;
   background-color: variables.$red-2;
   opacity: 1;
   display: flex;
@@ -25,12 +25,13 @@
   }
 
   button {
-    font-size: 1.5rem;
+    font-size: 3rem;
     background-color: transparent;
     border: none;
     align-self: flex-end;
-    margin-bottom: auto;
+    margin-bottom: 50px;
     color: black;
+    font-weight: 600;
   }
 }
 
