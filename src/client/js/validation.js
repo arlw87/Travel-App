@@ -6,4 +6,13 @@
  */
 export const isValidateDate = (date) => {
     return ((Date.parse(date) - Date.now()) > 0);
-}                       
+}          
+
+/**
+ * Checking the Destination input
+ * Input must be one character or more, not 
+ */
+export const isValidationPlaceName = (name) => {
+    const regex = new RegExp('^[a-z][a-z,\\s]*$');
+    return regex.test(name);
+}

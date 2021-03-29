@@ -1,5 +1,5 @@
 import { updateResults } from "./trip";
-import { isValidateDate } from "./validation";
+import { isValidateDate, isValidationPlaceName } from "./validation";
 import { displayError } from "./errorHandling";
 
 //handle the form controls
@@ -20,6 +20,12 @@ searchBtn.addEventListener('click', (event) => {
     if (!isValidateDate(date)){
         console.log('Date in the past');
         displayError('Date must be in the future');
+        return;
+    }
+
+    if(!isValidationPlaceName(destination)){
+        console.log('Not a validate place name');
+        displayError('Invalid place name');
         return;
     }
 
