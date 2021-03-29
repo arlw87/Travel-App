@@ -5,6 +5,7 @@ const cors = require('cors');
 const fetch = require('node-fetch');
 const dotenv = require('dotenv');
 const timeunit = require('timeunit');
+const { ModuleFilenameHelpers } = require('webpack');
 
 dotenv.config();
 
@@ -14,16 +15,13 @@ app.use(cors());
 
 app.use(express.static('dist'));
 
+
 //Sensitive information
 const geonameUsername = process.env.GEONAME_USERNAME; 
 const weatherbit_api = process.env.WEATHERBIT_API_KEY;
 const pixelBayApi = process.env.PIXELBAY_API_KEY;
 
-//start the server
-const port = 8000;
-const server = app.listen(port,  ()=>{
-    console.log(`server running on port ${port}`);
-});
+
 
 //localhost:${port}
 //APIs
@@ -128,20 +126,6 @@ const extractGeonamesData = (dataObj) => {
     }
 }
 
-//weather bit API 
-const currentWeatherUrl = (positionObj, apiKey) => {
-    const base = `https://api.weatherbit.io/v2.0/current?`;
-    const url = `${base}lat=${positionObj.lat}&lon=${positionObj.long}&key=${apiKey}`
-    return url;
-}
-
-//forest API
-const forecastWeatherUrl = (positionObj, apiKey) => {
-    const base = `https://api.weatherbit.io/v2.0/forecast/daily?`;
-    const url = `${base}&lat=${positionObj.lat}&lon=${positionObj.long}&key=${apiKey}`;
-    return url;
-}
-
 //the requirements on the project document for this are unclear but here is how i have interrupted it
 //if the trip is in the next 16 days then use the forecast from the 16 day forecast on the appropriate
 //day. If the trip is after the next 16 days then use the 16th day forecast. 
@@ -241,3 +225,12 @@ const calculateDays = (date) => {
 
     return diffInDays;
 }
+
+//forecast API
+const forecastWeatherUrl = (positionObj, apiKey) => {
+    const base = `https://api.weatherbit.io/v2.0/forecast/daily?`;
+    const url = `${base}&lat=${positionObj.lat}&lon=${positionObj.long}&key=${apiKey}`;
+    return url;
+}
+
+module.exports = app;
