@@ -5,13 +5,13 @@ const {cleanWebpackPlugin, CleanWebpackPlugin} = require('clean-webpack-plugin')
 const miniCSSExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
     entry: './src/client/index.js',
     mode: 'production',
     optimization: {
-        minimizer: [new TerserPlugin({})],
-        //, new OptimizeCSSAssetsPlugin({})
+        minimizer: [new TerserPlugin({}) , new OptimizeCSSAssetsPlugin({})],
     },
     module: {
         rules: [
@@ -66,6 +66,6 @@ module.exports = {
             protectWebpackAssets: false
         }),
         new miniCSSExtractPlugin({filename: '[name].css'}),
-
+        new WorkboxPlugin.GenerateSW()
     ]
 }
