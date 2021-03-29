@@ -150,7 +150,7 @@ const displayResults = (data) => {
     weatherDescription.innerHTML = weatherInfo;
     weatherIcon.src = weatherIconUrl;
     weatherTemps.innerHTML = `${highTemp} / ${lowTemp} &deg C`;
-    daysElement.innerHTML = `${daysToTrip} days until your trip`
+    daysElement.innerHTML = ` ${daysToTrip} days until your trip`
 
 
     //if the form has transformEndPosition class then a search has already occured

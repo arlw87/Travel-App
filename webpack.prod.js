@@ -2,12 +2,16 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const {cleanWebpackPlugin, CleanWebpackPlugin} = require('clean-webpack-plugin');
+const miniCSSExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
     entry: './src/client/index.js',
-    mode: 'development',
-    devServer: {
-        port: 8090
+    mode: 'production',
+    optimization: {
+        minimizer: [new TerserPlugin({})],
+        //, new OptimizeCSSAssetsPlugin({})
     },
     module: {
         rules: [
@@ -32,7 +36,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [{
-                    loader: "style-loader"
+                    loader: miniCSSExtractPlugin.loader
                 }, {
                     loader: "css-loader"
                 }, {
@@ -60,6 +64,8 @@ module.exports = {
             Verbose: true,
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false
-        })
+        }),
+        new miniCSSExtractPlugin({filename: '[name].css'}),
+
     ]
 }
