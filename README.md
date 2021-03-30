@@ -9,7 +9,12 @@ Fullstack application with a responsive and dynamic UI that allows a user to pla
 2. Clone and download the project from GitHub. 
 3. Instal all the project dependencies
    ```npm install```
-4. The project uses 3 external APIs for its functionality these include [geonames](http://www.geonames.org/) to get coordinate data for the place searched, [weather bit](https://www.weatherbit.io/api) to get weather forecast data for the place searched and [Pixabay](https://pixabay.com/api/docs/) to retrieve images of the location. In order to use these services a key (weatherbit or pixabay) or username (geoname) needs to be provided to the node server. Once they are acquired, create a file called .env in the root directory and copy the code below into the file, entering your personal access codes instead of the question marks. 
+4. The project uses 3 external APIs for its functionality these include:
+   - [geonames](http://www.geonames.org/) validate username required
+   - [weather bit](https://www.weatherbit.io/api) Free daily forecast account needed to obtain API key
+   - [Pixabay](https://pixabay.com/api/docs/) Free account needed to get API key
+  
+   Once signed up to these services, create a file called .env in the root directory and copy the code below into the file, entering your own details instead of the question marks. 
       ```
       GEONAME_USERNAME = '???'
       WEATHERBIT_API_KEY = '???'
