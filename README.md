@@ -3,6 +3,8 @@
 ## Description
 Fullstack application with a responsive and dynamic UI that allows a user to plan a multi destination trip displaying an image and weather data for each location. The app, built in html, sass and javascript uses a nodejs backend which utilities three third party APIs to retrieve the data for the trip 
 
+-- GIF of using the website --
+
 ## Installation
 
 1. Ensure that npm and node are installed on your system. This project was developed with node v14.15.4 and npm 6.14.10.
@@ -39,7 +41,7 @@ The purpose of the application is for users to build a travel plan for a trip th
 
 If the User likes that destination they can then add it to their travel plan by clicking the add button on the results card. This will take the user to the 'my travel plan' section of the webpage where their recent search result will be displayed with any previous ones. If they user wishes to add another trip they can click on the 'Add New Trip' card in the my travel plan section which will take the user back to the form section of the site to search for a new destination. A user can also delete a trip by clicking the 'remove trip' button on current 'my travel plan' cards.
 
-## Dependencies
+### Dependencies
 Project developed with node v14.15.4. All dependencies listed in the package.json file.
 
 ## Overview 
@@ -72,12 +74,7 @@ The backend uses an express server to serve the front end page it also has the e
 - The response object is then sent to the front end with a status property of complete
 - If there is an error in any of these steps the server will send a repsonse to the front end with the status failure and a message detailing the error
 
-
-
-
-
-
-
+The backend server code uses promises and then chains to achieve this asynchronous behavior. 
 
 ## Error Handling
 The user may encouter several errors. These can be
@@ -88,3 +85,10 @@ When an error occurs a pop up message box appears over the form section of the w
 
 -- GIF of the error message box --
 
+## Testing with Jest
+The Jest testing framework was used to run some basic tests on the server and the front end. 
+
+For the front end a jest test was written to test the place name validation function isValidationPlaceName, for the backend a simple test to determine if the app function existed in the server.js file. 
+
+## Service Workers
+Service workers were included in the production environment for the application. 
