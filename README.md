@@ -23,10 +23,21 @@ Fullstack application with a responsive and dynamic UI that allows a user to pla
 
 ## Building and running the application
 
-Once the project is installed. 
+The front end application is built with Webpack and has two configurations a development build and a production build. 
+
+- To build the development configuration use ```npm run build-dev"```
+- To build the production configuration use ```npm run build-prod```
+
+```npm run start```
+
+Load a browser and access the web app at 
+
+To run the application [http://localhost:8080/](http://localhost:8080/).
 
 ## Using the web App
 
-### Dependencies
+
+
+## Dependencies
 Project developed with node v14.15.4. All dependencies listed in the package.json file.
 
