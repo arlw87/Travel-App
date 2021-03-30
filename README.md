@@ -35,16 +35,18 @@ Load a browser and access the web app at
 To run the application [http://localhost:8080/](http://localhost:8080/).
 
 ## Usage
-The purpose of the application is for users to build a travel plan for a trip they would like to take. The user can search for destination they are interested in and specify a date when they would like to visit the destination. This search will return with a result card with an image of the location and it weather forecast. _Note if the trip is starting more than 16 days away the weather forecast displayed will be for 16 days time as that is the last forecast available_. If the User likes that destination they can then add it to their travel plan by clicking the add button on the results card. This will take the user to the 'my travel plan' section of the webpage where their recent search result will be displayed with any previous ones. If they user wishes to add another trip they can click on the 'Add New Trip' card in the my travel plan section which will take the user back to the form section of the site to search for a new destination. A user can also delete a trip by clicking the 'remove trip' button on current 'my travel plan' cards.
+The purpose of the application is for users to build a travel plan for a trip they would like to take. The user can search for destination they are interested in and specify a date when they would like to visit the destination. This search will return with a result card with an image of the location and it weather forecast. _Note if the trip is starting more than 16 days away the weather forecast displayed will be for 16 days time as that is the last forecast available_. 
+
+If the User likes that destination they can then add it to their travel plan by clicking the add button on the results card. This will take the user to the 'my travel plan' section of the webpage where their recent search result will be displayed with any previous ones. If they user wishes to add another trip they can click on the 'Add New Trip' card in the my travel plan section which will take the user back to the form section of the site to search for a new destination. A user can also delete a trip by clicking the 'remove trip' button on current 'my travel plan' cards.
 
 ## Dependencies
 Project developed with node v14.15.4. All dependencies listed in the package.json file.
 
 ## Overview 
-
+The Travel Planner Web Application uses a full stack implementation. The front end is designed with html, sass and js. The backend is written in js using the nodejs javascript runtime and the express framework. It uses webpack for configuring the front end build process. 
 
 ### Front End 
-The front end is designed with html, sass and js. It is a responsive design that works from small mobile devices to large desktop displays. The UI was designed to be attention grabbing and dynamic, implementing the following features: 
+ It is a responsive design that works from small mobile devices to large desktop displays. The UI was designed to be attention grabbing and dynamic, implementing the following features: 
 
 - A full screen hero banner with an animated header and flashing call to action button
 - Automatic scrolling of the page when certain events occur
@@ -53,6 +55,25 @@ The front end is designed with html, sass and js. It is a responsive design that
 -- GIF of website animations --
 
 The webpage form provides **validation** of the data input. It checks if the date entered is in the future and that the place name entered doesnt contain unexpected characters or numbers. 
+
+When the user searches for a new destination and date using the form the front end will send an API POST call to the local server's endpoint '/query', if the response has a status failure, the front end displays an error, if the response has a status complete then it parses te results and displays it in a result card in the form section of the webpage. 
+
+### Backend
+The backend uses an express server to serve the front end page it also has the end point '/query' that the front end sends its search requests too. When a POST request is sent to the '/query' endpoint the flow of events is as flows:
+
+- The place name and date is parsed in to variables from the request body object
+- The numbers of days from the current date to the date sent are calculated 
+- A response object is created and the number of days is added to it
+- A POST request to the geoname API is made passing the place name
+- The geoname API responses with the coordinates for that location, as well as the country. The place name and county are saved to the response object.
+- The coordinates are used to make a GET request to the Weather Bit forecast API that responses with the forecast for the next 16 days. The date sent to the '/query' endpoint if used to pick the correct forecast _note if date is over 16 days away the forecast for the 16th day is used_ This forecast is saved to the response object.
+- The place name and country are used to make a GET request to the pixabay API to get images of the location, the url of the first image detailed in the returned result array is saved to the response object
+- If no images are returned, normally because the location is obscure, then another GET request is sent to the pixabay API with just the location's country, the url of the first image detailed in the returned result array is saved to the response object
+- The response object is then sent to the front end with a status property of complete
+- If there is an error in any of these steps the server will send a repsonse to the front end with the status failure and a message detailing the error
+
+
+
 
 
 
