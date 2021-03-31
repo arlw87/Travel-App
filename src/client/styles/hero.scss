@@ -74,6 +74,11 @@ $delay-Time: 4s;
     width: 300px;
     opacity: 0;
 
+    &:hover {
+      //color: variables.$red-1;
+      font-style: italic;
+    }
+
     @media (min-width: variables.$tablet) {
       width: 500px;
     }
