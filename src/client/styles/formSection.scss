@@ -108,6 +108,11 @@ $translateAmount: 0.25 * $sectionHeight;
         align-self: center;
         margin: 0;
       }
+
+      &:hover {
+        color: #fff;
+        background-color: variables.$red-1;
+      }
     }
   }
 }
@@ -273,6 +278,11 @@ $translateAmount: 0.25 * $sectionHeight;
     border: none;
     color: variables.$red-1;
     padding: 1% 0;
+
+    &:hover {
+      color: #fff;
+      background-color: variables.$red-1;
+    }
   }
 }
 
