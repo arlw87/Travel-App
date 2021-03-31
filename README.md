@@ -52,7 +52,7 @@ The Travel Planner Web Application uses a full stack solution. The front end is 
 - Automatic scrolling of the page when certain events occur
 - Form animations when form results are returned 
 
--- GIF of website animations --
+![Examples of animations on the front end UI](./readme-media/animationExample.gif)
 
 The webpage form provides **validation** of the data input. It checks if the date entered is in the future and that the place name entered doesnt contain unexpected characters or numbers. 
 
