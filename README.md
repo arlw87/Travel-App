@@ -1,6 +1,7 @@
 # Travel Planner Web Application
 
-![Hero banner of Travel Planner Web Application](./readme-media/hero-page.PNG)
+![website operation](./readme-media/uiOperation.gif)
+_Travel Planner Web Application in operation_
 
 ## Description
 Full stack application with a responsive and dynamic UI that allows a user to plan a multi destination trip displaying an image and weather data for each location on that trip. The app, built in html, sass and javascript on the front end uses a nodejs backend which utilities three third party APIs to retrieve the data for each trip. 
@@ -52,7 +53,8 @@ The Travel Planner Web Application uses a full stack solution. The front end is 
 - Automatic scrolling of the page when certain events occur
 - Form animations when form results are returned 
 
-![Examples of animations on the front end UI](./readme-media/animationExample.gif)
+![Front end animations](./readme-media/animationExample.gif)
+_Examples of animations on the front end UI on a tablet screen size_
 
 The webpage form provides **validation** of the data input. It checks if the date entered is in the future and that the place name entered doesnt contain unexpected characters or numbers. 
 
@@ -81,7 +83,8 @@ The user may encounter several errors. These can be
 
 When an error occurs a pop up message box appears over the form section of the webpage, detailing the error that has happen.
 
--- GIF of the error message box --
+![Error message example](./readme-media/errorMessage.gif)
+_Examples of an error message on the front end UI on a mobile screen size_
 
 ## Testing with Jest
 The Jest testing framework was used to run some basic tests on the server and the front end. 
