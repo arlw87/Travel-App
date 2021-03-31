@@ -1,6 +1,6 @@
 # Travel Planner Web Application
 
--- GIF of using the website --
+![Hero banner of Travel Planner Web Application](./readme-media/hero-page.PNG)
 
 ## Description
 Full stack application with a responsive and dynamic UI that allows a user to plan a multi destination trip displaying an image and weather data for each location on that trip. The app, built in html, sass and javascript on the front end uses a nodejs backend which utilities three third party APIs to retrieve the data for each trip. 
