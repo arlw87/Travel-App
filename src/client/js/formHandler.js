@@ -193,7 +193,7 @@ import { displayError } from "./errorHandling";
         weatherDescription.innerHTML = weatherInfo;
         weatherIcon.src = weatherIconUrl;
         weatherTemps.innerHTML = `${highTemp} / ${lowTemp} &deg C`;
-        daysElement.innerHTML = ` ${daysToTrip} days until your trip`
+        daysElement.innerHTML = ` ${daysToTrip}   days until your trip`
     
         //When the form is in the center of the section, an animation is applied to the results
         //to move the form up to allow the result card to be displayed below it

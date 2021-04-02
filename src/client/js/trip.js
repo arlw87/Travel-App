@@ -85,7 +85,7 @@ export const updateResults = (resultsObj) => {
       <div class ="card-text">
         <div class="card-time-to-trip">
           <img src=${clockIcon}>
-          <p>${timeToTrip} days until trip</p>
+          <p>${timeToTrip}   days until trip</p>
         </div>
         <div class="card-divider"></div>
         <div class="card-weather-section">

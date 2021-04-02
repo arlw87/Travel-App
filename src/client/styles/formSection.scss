@@ -18,7 +18,7 @@ $main-element-width: 89%;
 
 #form-section {
   height: $sectionHeight;
-  //width: 100vw;
+  min-height: 748px;
   background-color: #eeeeee;
   display: flex;
   flex-direction: column;
