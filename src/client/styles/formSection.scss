@@ -44,6 +44,7 @@ $main-element-width: 89%;
 
     @media (min-width: variables.$tablet) {
       font-size: 3em;
+      padding-bottom: 0;
     }
 
     @media (min-width: variables.$small-laptop) {
