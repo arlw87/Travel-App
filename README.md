@@ -3,6 +3,9 @@
 ![website operation](./readme-media/uiOperation.gif)
 _Travel Planner Web Application in operation_
 
+## Deployment
+The app has been deployed to heroku and is available [here](https://guarded-tundra-65840.herokuapp.com/).
+
 ## Description
 Full stack application with a responsive and dynamic UI that allows a user to plan a multi destination trip displaying an image and weather data for each location on that trip. The app, built in Html, Sass and Javascript on the front end uses a nodejs backend which utilises three third party APIs to retrieve the data for each trip. 
 
