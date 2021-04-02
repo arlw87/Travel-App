@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Single Webpage trip planner App with front end and back end",
   "main": "./src/server/server.js",
+  "proxy": "http://localhost:8000",
   "scripts": {
     "test": "jest",
     "test-watch": "test:watch",
