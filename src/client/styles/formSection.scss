@@ -12,6 +12,7 @@ $imageWidth-large: 55%;
 
 $sectionHeight: 100vh;
 $translateAmount: 0.25 * $sectionHeight;
+$main-element-width: 89%;
 
 //
 
@@ -89,6 +90,7 @@ $translateAmount: 0.25 * $sectionHeight;
       align-items: center;
       justify-content: space-around;
       font-size: 2rem;
+      width: $main-element-width;
     }
 
     @media (min-width: variables.$medium-laptop) {
@@ -102,11 +104,17 @@ $translateAmount: 0.25 * $sectionHeight;
       background-color: variables.$red-2;
       border: none;
       color: variables.$red-1;
+      padding: 5px;
 
       @media (min-width: variables.$small-laptop) {
         width: 12%;
         align-self: center;
         margin: 0;
+        font-size: 0.9em;
+      }
+
+      @media (min-width: variables.$medium-laptop) {
+        font-size: 1em;
       }
 
       &:hover {
@@ -206,6 +214,10 @@ $translateAmount: 0.25 * $sectionHeight;
     max-width: none;
     width: 85%;
     flex-direction: row;
+  }
+
+  @media (min-width: variables.$small-laptop) {
+    width: $main-element-width;
   }
 
   @media (min-width: variables.$medium-laptop) {
