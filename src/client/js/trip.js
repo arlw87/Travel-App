@@ -3,7 +3,7 @@ import tempIcon from "../media/static/temperature_icon.png";
 import clockIcon from "../media/static/clock_icon.png";
 
 //help function
-import {hideResultsCard} from "./formHandler";
+import {resetResults} from "./formHandler";
 
 //Control all actions to do with planning trip
 let latestResults = null;
@@ -118,18 +118,7 @@ const htmlToElement = (htmlString) => {
     return template.content.firstChild; //return the content inside the template which is an element
 }
 
-/**
- * From the results card and move the form and heading back to the center
- */
-const resetResults = () => {
-    //hide the results card
-    hideResultsCard();
-    //moves the heading and form back to the middle of the page
-    document.querySelector('form').classList.remove('transformEndPosition');
-    document.querySelector('#form-section > h2').classList.remove('transformEndPosition');
-    document.querySelector('form').classList.add('transformStartPosition');
-    document.querySelector('#form-section > h2').classList.add('transformStartPosition');
-}
+
 
 //Add New Trip Card Button
 document.querySelector('.add-new-trip').addEventListener('click', (event) => {
