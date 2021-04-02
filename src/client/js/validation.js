@@ -1,3 +1,5 @@
+//validation function for checking the users input to the form
+
 /**
  * Determine if the date supplied is in the future or not
  * Calculate the supplied dates ms from epoch subtract
