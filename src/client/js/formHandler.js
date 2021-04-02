@@ -54,7 +54,7 @@ import { displayError } from "./errorHandling";
         /**
          * Post form data to local sever and process the response when it is recieved 
          */
-        postData(`http://localhost:${process.env.PORT || 8000}/query`, sendObj)
+        postData(`/query`, sendObj)
             .then(result => {
                 //if there is an error from the server display error message and return
                 if (result.status==='failure'){
