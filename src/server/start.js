@@ -1,3 +1,4 @@
+//Server is started in this file
 //listen in seperate file to help test server
 const app = require('./server.js');
 

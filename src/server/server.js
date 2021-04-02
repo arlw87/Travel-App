@@ -5,7 +5,6 @@ const cors = require('cors');
 const fetch = require('node-fetch');
 const dotenv = require('dotenv');
 const timeunit = require('timeunit');
-const { ModuleFilenameHelpers } = require('webpack');
 
 dotenv.config();
 
@@ -15,25 +14,21 @@ app.use(cors());
 
 app.use(express.static('dist'));
 
-
-//Sensitive information
+//API keys
 const geonameUsername = process.env.GEONAME_USERNAME; 
 const weatherbit_api = process.env.WEATHERBIT_API_KEY;
 const pixelBayApi = process.env.PIXELBAY_API_KEY;
 
-
-
-//localhost:${port}
-//APIs
+//Create a server endpoint to send the search query from front end
 app.post(`/query`, (req, res) => {
-    console.log("Post to API 'Query'");
-    console.log(req.body);
+    //extract data from request object
     const location = req.body.destination;
     const date = req.body.date;
 
-    //get days to trip
+    //get days until trip
     const daysToTrip = calculateDays(date);
 
+    //create a response object that will be sent back to the front end
     const clientResponseObject = {
         weather: undefined,
         imageUrl: undefined,
@@ -41,30 +36,43 @@ app.post(`/query`, (req, res) => {
         daysToTrip: daysToTrip
     };
 
+    //create the geoname url for first API call
     const geonameUrl = geoNamesUrl(geonameUsername, location);
+
+    //Asynchronous code that calls and proceeds API calls one after another
+    //Call the geoname API to get coordinates and country of the place that the user searched for
     fetchData(geonameUrl, 'POST')
         .then((result) => {
            return extractGeonamesData(result); 
         }).then((result) => {
+            //save the parsed Geonames results in the response object
             clientResponseObject.location = {
                 place: result.location,
                 country: result.countryName
             }
+
+            //create url for weather bit api call
             const url = forecastWeatherUrl(result, weatherbit_api);
+            
             //promise not returned until the fetchData is complete
-            //fetchData returns a promise
-            //a then is not resolved until a value is returned
+            //fetchData returns a promise which is
+            //not resolved until a value is returned
             return fetchData(url, 'GET'); //fetch forecast data
         }).then(result => {
+            //process the weather bit returned object
             const forecastData = extractWeatherData(result, date);
+
+            //save parsed returned data to the response object
             clientResponseObject.weather = weatherDataForClient(forecastData);
+
             //fetch the image url for the client using the place name
             //queries with place and county seem to do better
             const query = `${clientResponseObject.location.place}, ${clientResponseObject.location.country}`;
             const url = createPixelbayUrl(query, pixelBayApi);
             return fetchData(url, 'GET');
         }).then(result => {
-            //if there are no images for the place name then use just the country
+            //if there are no images for the place name then use just the country name in a new
+            //api call
             if (result.total == 0){
                 console.log("No result so search using country");
                 //do another query
@@ -75,7 +83,9 @@ app.post(`/query`, (req, res) => {
         }).then((result) => {
             //get image url 
             const imageUrl = result.hits[0].largeImageURL;
+            //save image url to the response object
             clientResponseObject.imageUrl = imageUrl;
+            //send the response object back to front end
             res.send({
                 status:'complete',
                 response:clientResponseObject
@@ -83,6 +93,8 @@ app.post(`/query`, (req, res) => {
         }).catch((error) => {
             console.log('There has been an error');
             console.log(error);
+            //if there was an error send a error response back to the front end
+            //the message will be display to the user on the web page
             res.send({status:'failure', message: "Error retrieving data, please try again"});
         });
 
@@ -126,15 +138,21 @@ const extractGeonamesData = (dataObj) => {
     }
 }
 
-//the requirements on the project document for this are unclear but here is how i have interrupted it
-//if the trip is in the next 16 days then use the forecast from the 16 day forecast on the appropriate
-//day. If the trip is after the next 16 days then use the 16th day forecast. 
+/**
+ * Extract the correct weather forcast from the returned weather data. If the trip's date is in 16 days
+ * or less than return that day's forcast, if it is in more than 16 days time then use the 16th days
+ * forecast
+ * @param {object} data Returned weather data from API call
+ * @param {string} date Date that the trip is scheduled to start
+ * @returns The weather data for the date required or if the date is more than 16 days in the future
+ * then the weather data for 16 days time
+ */
 const extractWeatherData = (data, date) => {
 
     try{
         //use the form on client to ensure a previous date is not selected.
         let weatherData = null;
-        //loop through the data and compare date
+        //loop through the data and compare dates
         for (dayData of data.data){
             if (dayData.datetime == date){
                 console.log('Date Matches!');
@@ -154,6 +172,12 @@ const extractWeatherData = (data, date) => {
     }
 }
 
+/**
+ * Gets the required specific weather forecast data from the full weather forcast
+ * data object
+ * @param {object} dataObj - representation of the weather forcast for a day 
+ * @returns Object with just a selection of weather forcast values
+ */
 const weatherDataForClient = (dataObj) => {
 
     try{
@@ -173,13 +197,16 @@ const weatherDataForClient = (dataObj) => {
 
 }
 
-//PixelBay
+/**
+ * Creates a url for an API query to the PixelBay service
+ * @param {*} query The search term for the image
+ * @param {string} apiKey - security key for accessing the API 
+ * @returns 
+ */
 const createPixelbayUrl = (query, apiKey) => {
     try{
         const baseUrl = `https://pixabay.com/api/`;
         const url = `${baseUrl}?key=${apiKey}&q=${query}&image_type=photo`
-        console.log('pixelBay url');
-        console.log(url);
         return url;
     } catch (error){
         console.log('Error creating pixelBay url');
@@ -213,6 +240,11 @@ const fetchData = async (url, method) => {
         }
 }
 
+/**
+ * Calculates the number of days between today and the date passed to the function
+ * @param {string} date - date passed to function 
+ * @returns Number of days between now and the date
+ */
 const calculateDays = (date) => {
     //check for blank date
     if (date === ''){
@@ -226,7 +258,12 @@ const calculateDays = (date) => {
     return diffInDays;
 }
 
-//forecast API
+/**
+ * Creates a url for an API query to the weather bit service
+ * @param {obj} positionObj - contains longitude and latitude data for location 
+ * @param {string} apiKey - security key to use the service 
+ * @returns a string representing the url to made the desired query
+ */
 const forecastWeatherUrl = (positionObj, apiKey) => {
     const base = `https://api.weatherbit.io/v2.0/forecast/daily?`;
     const url = `${base}&lat=${positionObj.lat}&lon=${positionObj.long}&key=${apiKey}`;
