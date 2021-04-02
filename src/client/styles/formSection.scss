@@ -76,7 +76,6 @@ $main-element-width: 89%;
 
     @media (min-width: variables.$mobileLarge) {
       width: variables.$sections-width-medium-mobile;
-      max-width: 340px;
     }
 
     @media (min-width: variables.$tablet) {
@@ -207,7 +206,6 @@ $main-element-width: 89%;
 
   @media (min-width: variables.$mobileLarge) {
     width: variables.$sections-width-medium-mobile;
-    max-width: 340px;
   }
 
   @media (min-width: variables.$tablet) {
@@ -359,6 +357,7 @@ $main-element-width: 89%;
   display: flex;
   //border: 1px solid red;
   align-items: center;
+  justify-content: center;
 
   @media (min-width: variables.$tablet) {
     justify-content: center;
