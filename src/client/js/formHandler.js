@@ -4,6 +4,26 @@ import { updateResults } from "./trip";
 import { isValidateDate, isValidationPlaceName } from "./validation";
 import { displayError } from "./errorHandling";
 
+//latest results will be saved to this object
+let latestResults = null;
+
+/**
+ * Saves the latest results so they can be used by the createTrip function.
+ */
+const setResults = (resultsObj) => {
+    latestResults = resultsObj;
+} 
+
+/**
+ * Returns the latest results. Used by createTrip function to display results
+ * in a new trip card
+ * @returns latestResults object
+ */
+export const getResults = () => {
+    return latestResults;
+}
+
+
 //code block to make the scope private
 {
     const searchBtn = document.querySelector('#search');
@@ -66,7 +86,7 @@ import { displayError } from "./errorHandling";
                 //send latest results to the trip js file
                 //so they can be used to display in the trip section
                 //if user add serach results to the 'my trip' section
-                updateResults(result);
+                setResults(result);
             })
             .catch((error) => {
                 processError("Error with search request");

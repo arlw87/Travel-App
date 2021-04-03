@@ -5,28 +5,17 @@ import tempIcon from "../media/static/temperature_icon.png";
 import clockIcon from "../media/static/clock_icon.png";
 
 //resets the results card when result is added to the trip section
-import {resetResults} from "./formHandler";
+import {resetResults, getResults} from "./formHandler";
 
-//latest results will be saved to this object
-let latestResults = null;
 
 /**
- * Update the latest results. When results are returned from server
- * this function is run in the formHandler code to update this latestResults
- * object so that it can be used to generate a trip card if required
- */
-export const updateResults = (resultsObj) => {
-    latestResults = resultsObj;
-} 
-
-  /**
-   * Set up an event listener to fire when the add trip button is the 
-   * results form is clicked
-   */
- 
-  
+ * Creates a trip card from the latest results when the add trip button is clicked
+ * @param {} event 
+ * @returns 
+ */   
   export const createTrip = (event) => {
      
+    const latestResults = getResults();
     //error if the latest results is null 
     if (latestResults == null){
         alert('error adding trip results');
