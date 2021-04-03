@@ -2,7 +2,7 @@
 
 import {heroEventListenerCreate} from './hero.js';
 import {createTrip} from './trip.js';
-import {performSearch} from './formHandler.js';
+import {performSearch, displayResultsCard} from './formHandler.js';
 import {closeErrorMessageBox} from './errorHandling';
 
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -20,4 +20,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     document.querySelector('.error-button').addEventListener('click', closeErrorMessageBox);
 
+    //When the form has finished it animation, of moving from the center to the top of the section
+    //then display the results card
+    document.querySelector('form').addEventListener('animationend', displayResultsCard);
 });
