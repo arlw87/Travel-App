@@ -20,14 +20,14 @@ export const displayError = (errorMessage) => {
 
 
 /**
- * Creates an on click listener for the error message box close button. When the button, an 'X' in
+ * Function to close the error message box. When the button, an 'X' in
  * the top right hand corner of the message box is clicked the message box is closed. This is
  * achieved by setting and removing classes on the error-handler div. 
  */
-document.querySelector('.error-button').addEventListener('click', (event) => {
+export const closeErrorMessageBox = (event) => {
     //remove the error display
     const errorDisplay = document.querySelector('.error-handler-background');
     errorDisplay.classList.remove('error-display');
     errorDisplay.classList.add('error-non-display');
     return;
-});
+}

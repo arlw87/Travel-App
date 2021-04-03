@@ -3,6 +3,7 @@
 import {heroEventListenerCreate} from './hero.js';
 import {createTrip} from './trip.js';
 import {performSearch} from './formHandler.js';
+import {closeErrorMessageBox} from './errorHandling';
 
 document.addEventListener('DOMContentLoaded', (event) => {
 
@@ -16,5 +17,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     //form search by user
     const searchBtn = document.querySelector('#search');
     searchBtn.addEventListener('click', performSearch);
+
+    document.querySelector('.error-button').addEventListener('click', closeErrorMessageBox);
 
 });
