@@ -225,16 +225,10 @@ const displayResults = (data) => {
     clearForm();
 }
 
-//When the form has finished it animation, of moving from the center to the top of the section
-//then display the results card
-document.querySelector('form').addEventListener('animationend', (event)=>{
-    displayResultsCard();
-});
-
 /**
  * Display the results card
  */
-const displayResultsCard = () => {
+export const displayResultsCard = () => {
     document.querySelector('.results').classList.remove('display-none');
     document.querySelector('.results').classList.add('display-flex');
 }

@@ -1,7 +1,7 @@
 // Load all the event listeners
 
 import {heroEventListenerCreate} from './hero.js';
-import {createTrip} from './trip.js';
+import {createTrip, scrollToForm} from './trip.js';
 import {performSearch, displayResultsCard} from './formHandler.js';
 import {closeErrorMessageBox} from './errorHandling';
 
@@ -23,4 +23,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     //When the form has finished it animation, of moving from the center to the top of the section
     //then display the results card
     document.querySelector('form').addEventListener('animationend', displayResultsCard);
+
+    //Add new trip card event listener
+    document.querySelector('.add-new-trip').addEventListener('click', scrollToForm);
 });

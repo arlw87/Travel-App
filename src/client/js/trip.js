@@ -117,14 +117,12 @@ import {resetResults, getResults} from "./formHandler";
       return template.content.firstChild; //return the content inside the template which is an element
   }
 
-  /**
-   * Add an click event listener to the add new trip card that will scroll up to the form section
-   */
-  document.querySelector('.add-new-trip').addEventListener('click', (event) => {
+  //Scroll to the form section
+  export const scrollToForm = (event) => {
       //simpl;y scroll up to the form section
       document.querySelector('#form-section').scrollIntoView({
           behavior: "smooth"
       });
-  });
+    }
 
 
