@@ -19,16 +19,13 @@ export const updateResults = (resultsObj) => {
     latestResults = resultsObj;
 } 
 
-//put code into a private scope
-{
-
-  //Add trip button on results card
-  const addTripButton = document.querySelector('.results button');
   /**
    * Set up an event listener to fire when the add trip button is the 
    * results form is clicked
    */
-  addTripButton.addEventListener('click', (event)=> {
+ 
+  
+  export const createTrip = (event) => {
      
     //error if the latest results is null 
     if (latestResults == null){
@@ -68,7 +65,7 @@ export const updateResults = (resultsObj) => {
     //delay this so it doesnt display appear instantly, 
     //spoiling the scroll smooth effect 
     setTimeout(resetResults, 500);
-  });
+  }
 
 
   /**
@@ -140,5 +137,5 @@ export const updateResults = (resultsObj) => {
           behavior: "smooth"
       });
   });
-}
+
 

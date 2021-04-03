@@ -1,6 +1,6 @@
 //function used in hero banner
 
-//use code blocks to make variables private
+export const heroEventListenerCreate = () =>
 {
     const formSection = document.querySelector('#form-section');
     const callToAction = document.querySelector('.call-to-action');
